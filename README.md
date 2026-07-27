@@ -83,27 +83,58 @@ Para añadir uno, se copia un bloque completo y se cambian la fecha, el título 
 
 Recuerde añadir también las claves de texto del nuevo evento al diccionario inglés.
 
-### Colores y tipografía
+### Diseño: «luz y vidrio»
+
+La idea: detrás de toda la página hay un campo fijo de **tres luces** —amarilla,
+azul y roja— muy difuminadas. Todo el contenido flota encima en **paneles de vidrio
+esmerilado**, y cada panel lleva la sombra de color de una de las tres luces. La
+bandera nunca aparece como un bloque plano: aparece como luz y como sombra.
 
 Todo está centralizado en las variables CSS al inicio de `assets/css/styles.css`:
 
 ```css
 :root {
-  --brand: #0B3A82;   /* azul */
-  --gold:  #E0A21A;   /* amarillo */
-  --coral: #D93B3B;   /* rojo */
-  ...
+  --amarillo: #FFC72C;
+  --azul:     #1E5BE0;
+  --rojo:     #EE3B3B;
+
+  --tint-a: .17;   /* cuánto color lleva el vidrio del panel */
+  --rim:    .34;   /* cuánto color lleva el borde */
+  --glow-a: .58;   /* fuerza del halo de color detrás del panel */
 }
 ```
 
-Los colores de la bandera se usan como acento, no como fondo, para que el resultado
-sea festivo pero profesional.
+Para subir o bajar la intensidad del efecto, mueva `--tint-a`, `--rim` y `--glow-a`.
+Están definidos por separado en modo claro y oscuro porque el mismo valor no
+funciona en los dos.
 
-Nota importante: `--brand` es un color de **texto** (se aclara en modo oscuro),
-mientras que `--band-from/mid/to` son los azules oscuros de los **fondos grandes**
-(la franja de apoyo, el ticket, la cita). Están separados a propósito: si se usara
-`--brand` para los fondos, en modo oscuro quedarían azul claro y el texto blanco
-perdería contraste.
+Cada tarjeta declara bajo qué luz está con una clase: `lit-amarillo`, `lit-azul`
+o `lit-rojo`. Eso define su tinte, su borde, su halo y el color de su ícono.
+
+```html
+<article class="card program reveal lit-rojo"> … </article>
+```
+
+**Cosas que aprendimos ajustando esto** (útiles si va a modificarlo):
+
+- Las tres luces **no deben solaparse**. Amarillo, azul y rojo superpuestos se
+  promedian y dan gris; por eso cada una ocupa su propia zona y la esquina
+  superior izquierda queda limpia, que es donde caen los títulos.
+- En modo oscuro las luces van **mucho más tenues**. Sobre un fondo casi negro
+  crean manchas brillantes que se comen el texto pequeño.
+- Sobre fondo claro, una sombra de color casi no se ve. Lo que hace que el color
+  se lea es el **tinte dentro del vidrio**, no la sombra.
+
+### Interactividad
+
+En `assets/js/main.js`:
+
+- Las luces se mueven con el cursor y se desplazan lentamente con el scroll.
+- Los paneles de vidrio reciben un reflejo que sigue al puntero y se inclinan
+  un poco (máximo 3.2°).
+
+Todo esto se desactiva solo en teléfonos (puntero grueso) y para quien tenga
+activado «reducir movimiento» en su sistema.
 
 ---
 
@@ -148,7 +179,11 @@ de compilación vacío; el directorio de publicación es la raíz.
 
 Verificado durante el desarrollo:
 
-- Contraste **WCAG AA** en todos los textos, en modo claro y oscuro.
+- Contraste **WCAG AA** en los 44 textos revisados, en modo claro y oscuro,
+  **medido sobre los píxeles realmente pintados**. Con vidrio esmerilado no basta
+  con leer el CSS: `backdrop-filter` deja pasar la luz de atrás, así que la
+  comprobación oculta las letras, fotografía el fondo real de cada texto y calcula
+  el contraste del peor 5 % de esos píxeles.
 - Navegación por teclado con enlace «saltar al contenido» y foco visible.
 - Menú móvil con `aria-expanded`, cierre con `Esc` y al hacer clic fuera.
 - Respeta `prefers-reduced-motion` (desactiva animaciones).

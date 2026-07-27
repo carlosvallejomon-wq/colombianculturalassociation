@@ -538,4 +538,103 @@
   var year = document.getElementById('year');
   if (year) year.textContent = String(new Date().getFullYear());
 
+  /* ========================================================================
+     Ambient interaction — "luz y vidrio"
+     Three effects, all optional: the lights drift with pointer and scroll,
+     glass panels catch a reflection under the cursor, and cards tilt a
+     little. Everything below is skipped for reduced-motion visitors and for
+     coarse pointers (phones), where it would cost battery and do nothing.
+     ======================================================================== */
+  var motionOK = !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var finePointer = window.matchMedia('(pointer: fine)').matches;
+
+  /* --- Lights: pointer parallax + scroll drift ---------------------------- */
+  var luces = document.querySelectorAll('.luz');
+
+  if (luces.length && motionOK) {
+    var pointerX = 0, pointerY = 0;   // -0.5 .. 0.5, eased toward the target
+    var targetX = 0, targetY = 0;
+    var scrollY = 0;
+    var frame = null;
+
+    var render = function () {
+      frame = null;
+      // Ease toward the pointer so the lights feel heavy, not twitchy.
+      pointerX += (targetX - pointerX) * 0.06;
+      pointerY += (targetY - pointerY) * 0.06;
+
+      luces.forEach(function (luz) {
+        var depth = parseFloat(luz.getAttribute('data-depth')) || 20;
+        luz.style.setProperty('--px', (pointerX * depth).toFixed(2));
+        luz.style.setProperty('--py', (pointerY * depth).toFixed(2));
+        // Lights drift slowly as the page scrolls. The factor is tiny and the
+        // result clamped: the backdrop is fixed, so anything larger walks the
+        // lights straight out of the viewport and the page goes flat.
+        var drift = scrollY * depth * -0.0006;
+        luz.style.setProperty('--sy', Math.max(-90, Math.min(90, drift)).toFixed(2));
+      });
+
+      // Keep animating only while the easing is still visibly moving.
+      if (Math.abs(targetX - pointerX) > 0.001 || Math.abs(targetY - pointerY) > 0.001) request();
+    };
+
+    var request = function () { if (frame === null) frame = requestAnimationFrame(render); };
+
+    if (finePointer) {
+      window.addEventListener('pointermove', function (e) {
+        targetX = e.clientX / window.innerWidth - 0.5;
+        targetY = e.clientY / window.innerHeight - 0.5;
+        request();
+      }, { passive: true });
+    }
+
+    window.addEventListener('scroll', function () {
+      scrollY = window.scrollY;
+      request();
+    }, { passive: true });
+
+    request();
+  }
+
+  /* --- Glass: reflection follows the cursor, card tilts slightly ---------- */
+  if (finePointer && motionOK) {
+    var TILT = 3.2; // degrees at the far corner — any more reads as a gimmick
+    var panels = document.querySelectorAll('.card, .ticket, .support-inner');
+
+    panels.forEach(function (panel) {
+      var ticking = false;
+      var rect = null;
+
+      var onMove = function (e) {
+        if (ticking) return;
+        ticking = true;
+        requestAnimationFrame(function () {
+          ticking = false;
+          if (!rect) return;
+          var x = (e.clientX - rect.left) / rect.width;
+          var y = (e.clientY - rect.top) / rect.height;
+          panel.style.setProperty('--mx', (x * 100).toFixed(1) + '%');
+          panel.style.setProperty('--my', (y * 100).toFixed(1) + '%');
+          panel.style.transform =
+            'perspective(900px) rotateX(' + ((0.5 - y) * TILT).toFixed(2) + 'deg) ' +
+            'rotateY(' + ((x - 0.5) * TILT).toFixed(2) + 'deg) translateY(-4px)';
+        });
+      };
+
+      panel.addEventListener('pointerenter', function () {
+        // Measure once per hover: reading layout on every move would thrash.
+        rect = panel.getBoundingClientRect();
+      });
+
+      panel.addEventListener('pointermove', onMove, { passive: true });
+
+      panel.addEventListener('pointerleave', function () {
+        rect = null;
+        panel.style.removeProperty('--mx');
+        panel.style.removeProperty('--my');
+        panel.style.transform = '';
+      });
+    });
+  }
+
 })();

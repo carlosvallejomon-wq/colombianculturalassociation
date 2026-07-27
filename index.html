@@ -6,8 +6,8 @@
 <title>Colombian Cultural Association | Cultura colombiana en Kansas City</title>
 
 <meta name="description" content="La Colombian Cultural Association promueve y preserva la cultura y los valores colombianos en el área metropolitana de Kansas City. Organización 501(c)(3) fundada en 2018.">
-<meta name="theme-color" content="#0B3A82" media="(prefers-color-scheme: light)">
-<meta name="theme-color" content="#080B16" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#E9EDF9" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#070B1A" media="(prefers-color-scheme: dark)">
 <link rel="canonical" href="https://colombianculturalassociation.org/">
 
 <!-- Open Graph / social -->
@@ -22,7 +22,7 @@
 <meta name="twitter:site" content="@CCAmokan">
 
 <!-- Self-contained SVG favicon: flag-derived emblem -->
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%230B3A82'/%3E%3Crect x='6' y='7' width='20' height='9' rx='2' fill='%23F2B93B'/%3E%3Crect x='6' y='17' width='20' height='4' rx='1.5' fill='%230B3A82'/%3E%3Crect x='6' y='22' width='20' height='4' rx='2' fill='%23D93B3B'/%3E%3C/svg%3E">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23070B1A'/%3E%3Crect x='6' y='7' width='20' height='9' rx='2' fill='%23FFC72C'/%3E%3Crect x='6' y='17' width='20' height='4' rx='1.5' fill='%231E5BE0'/%3E%3Crect x='6' y='22' width='20' height='4' rx='2' fill='%23EE3B3B'/%3E%3C/svg%3E">
 
 <link rel="stylesheet" href="assets/css/styles.css">
 
@@ -58,6 +58,14 @@
 
 <a class="skip-link" href="#main" data-i18n="a11y.skip">Saltar al contenido principal</a>
 
+<!-- Fixed field of light behind everything: the flag as illumination.
+     main.js nudges each light with the pointer and with scroll. -->
+<div class="luminaria" aria-hidden="true">
+  <span class="luz luz-amarilla" data-depth="26"></span>
+  <span class="luz luz-azul" data-depth="-18"></span>
+  <span class="luz luz-roja" data-depth="34"></span>
+</div>
+
 <!-- ============================= HEADER ============================= -->
 <header class="site-header" id="siteHeader">
   <div class="shell header-inner">
@@ -66,12 +74,12 @@
       <span class="brand-mark" aria-hidden="true">
         <svg viewBox="0 0 40 40" fill="none">
           <rect width="40" height="40" rx="11" fill="url(#bm)"/>
-          <rect x="8" y="9" width="24" height="11" rx="2.5" fill="#F2B93B"/>
-          <rect x="8" y="21.5" width="24" height="4.5" rx="1.5" fill="#1348A0"/>
-          <rect x="8" y="27.5" width="24" height="4.5" rx="2.5" fill="#D93B3B"/>
+          <rect x="8" y="9" width="24" height="11" rx="2.5" fill="#FFC72C"/>
+          <rect x="8" y="21.5" width="24" height="4.5" rx="1.5" fill="#1E5BE0"/>
+          <rect x="8" y="27.5" width="24" height="4.5" rx="2.5" fill="#EE3B3B"/>
           <defs>
             <linearGradient id="bm" x1="0" y1="0" x2="40" y2="40">
-              <stop stop-color="#0B3A82"/><stop offset="1" stop-color="#071F4A"/>
+              <stop stop-color="#141C3A"/><stop offset="1" stop-color="#070B1A"/>
             </linearGradient>
           </defs>
         </svg>
@@ -119,13 +127,6 @@
 
 <!-- ============================= HERO ============================= -->
 <section class="hero" id="inicio">
-  <div class="hero-bg" aria-hidden="true">
-    <span class="glow glow-1"></span>
-    <span class="glow glow-2"></span>
-    <span class="glow glow-3"></span>
-    <span class="grid-lines"></span>
-  </div>
-
   <div class="shell hero-inner">
     <p class="eyebrow reveal" data-i18n="hero.eyebrow">Kansas City · Fundada en 2018 · 501(c)(3)</p>
 
@@ -195,7 +196,7 @@
     </div>
 
     <div class="about-grid">
-      <div class="card values-card reveal">
+      <div class="card values-card reveal lit-azul">
         <ul class="values">
           <li>
             <span class="v-icon" aria-hidden="true">
@@ -236,7 +237,7 @@
         </ul>
       </div>
 
-      <aside class="card quote-card reveal">
+      <aside class="card quote-card reveal lit-rojo">
         <span class="quote-mark" aria-hidden="true">“</span>
         <blockquote data-i18n="about.quote">
           Nuestra meta es expandir nuestra cultura, lograr que la gente quiera aprender
@@ -264,8 +265,8 @@
     </div>
 
     <div class="cards">
-      <article class="card program reveal">
-        <span class="p-icon p-gold" aria-hidden="true">
+      <article class="card program reveal lit-amarillo">
+        <span class="p-icon" aria-hidden="true">
           <svg viewBox="0 0 24 24"><path d="M4 20V6.8a1 1 0 0 1 .7-1l12-3.2a1 1 0 0 1 1.3 1V17"/><circle cx="7" cy="18.5" r="2.3"/><circle cx="17" cy="16" r="2.3"/></svg>
         </span>
         <h3 data-i18n="programs.p1Title">Festival de la Independencia</h3>
@@ -279,8 +280,8 @@
         </a>
       </article>
 
-      <article class="card program reveal">
-        <span class="p-icon p-blue" aria-hidden="true">
+      <article class="card program reveal lit-azul">
+        <span class="p-icon" aria-hidden="true">
           <svg viewBox="0 0 24 24"><path d="M4 5.5h7a2.5 2.5 0 0 1 2.5 2.5V20a2 2 0 0 0-2-2H4V5.5Z"/><path d="M20 5.5h-4.5a2.5 2.5 0 0 0-2 1"/><path d="M20 5.5V18h-6"/></svg>
         </span>
         <h3 data-i18n="programs.p2Title">Programas educativos</h3>
@@ -290,8 +291,8 @@
         </p>
       </article>
 
-      <article class="card program reveal">
-        <span class="p-icon p-coral" aria-hidden="true">
+      <article class="card program reveal lit-rojo">
+        <span class="p-icon" aria-hidden="true">
           <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M3.5 12h17M12 3.5c2.4 2.3 3.7 5.4 3.7 8.5S14.4 18.2 12 20.5c-2.4-2.3-3.7-5.4-3.7-8.5S9.6 5.8 12 3.5Z"/></svg>
         </span>
         <h3 data-i18n="programs.p3Title">Festival multicultural</h3>
@@ -301,8 +302,8 @@
         </p>
       </article>
 
-      <article class="card program reveal">
-        <span class="p-icon p-gold" aria-hidden="true">
+      <article class="card program reveal lit-amarillo">
+        <span class="p-icon" aria-hidden="true">
           <svg viewBox="0 0 24 24"><path d="M9 18V6.5l9-2v11"/><circle cx="6.5" cy="18" r="2.5"/><circle cx="15.5" cy="15.5" r="2.5"/></svg>
         </span>
         <h3 data-i18n="programs.p4Title">Música y danza</h3>
@@ -312,8 +313,8 @@
         </p>
       </article>
 
-      <article class="card program reveal">
-        <span class="p-icon p-blue" aria-hidden="true">
+      <article class="card program reveal lit-azul">
+        <span class="p-icon" aria-hidden="true">
           <svg viewBox="0 0 24 24"><path d="M12 21s-7.5-4.7-7.5-10A4.5 4.5 0 0 1 12 8.4a4.5 4.5 0 0 1 7.5 2.6c0 5.3-7.5 10-7.5 10Z"/></svg>
         </span>
         <h3 data-i18n="programs.p5Title">Apoyo comunitario</h3>
@@ -323,8 +324,8 @@
         </p>
       </article>
 
-      <article class="card program reveal">
-        <span class="p-icon p-coral" aria-hidden="true">
+      <article class="card program reveal lit-rojo">
+        <span class="p-icon" aria-hidden="true">
           <svg viewBox="0 0 24 24"><rect x="3.5" y="5" width="17" height="15.5" rx="2.5"/><path d="M3.5 10h17M8.5 3.5V7M15.5 3.5V7"/></svg>
         </span>
         <h3 data-i18n="programs.p6Title">Encuentros durante el año</h3>
@@ -418,7 +419,7 @@
       Cambie `is-past` por `is-next` para destacar el próximo evento.
     -->
     <ol class="events">
-      <li class="event is-next reveal">
+      <li class="card event is-next reveal lit-azul">
         <div class="ev-date">
           <span class="ev-day">19</span>
           <span class="ev-mon" data-i18n="events.e1Mon">Jul</span>
@@ -438,7 +439,7 @@
         </div>
       </li>
 
-      <li class="event is-past reveal">
+      <li class="card event is-past reveal lit-rojo">
         <div class="ev-date">
           <span class="ev-day ev-day-tbd" data-i18n="events.e2Day">—</span>
           <span class="ev-mon" data-i18n="events.e2Mon">Dic</span>
@@ -458,7 +459,7 @@
         </div>
       </li>
 
-      <li class="event is-past reveal">
+      <li class="card event is-past reveal lit-amarillo">
         <div class="ev-date">
           <span class="ev-day ev-day-tbd" data-i18n="events.e3Day">—</span>
           <span class="ev-mon" data-i18n="events.e3Mon">Jul</span>
@@ -494,8 +495,8 @@
     </div>
 
     <div class="cards cards-3">
-      <article class="card involve reveal">
-        <span class="p-icon p-blue" aria-hidden="true">
+      <article class="card involve reveal lit-azul">
+        <span class="p-icon" aria-hidden="true">
           <svg viewBox="0 0 24 24"><path d="M16 20v-1.6a3.4 3.4 0 0 0-3.4-3.4H7.4A3.4 3.4 0 0 0 4 18.4V20"/><circle cx="10" cy="8" r="3.4"/><path d="M19 8.5v5M16.5 11h5"/></svg>
         </span>
         <h3 data-i18n="involved.i1Title">Voluntariado</h3>
@@ -509,8 +510,8 @@
         </a>
       </article>
 
-      <article class="card involve reveal">
-        <span class="p-icon p-gold" aria-hidden="true">
+      <article class="card involve reveal lit-amarillo">
+        <span class="p-icon" aria-hidden="true">
           <svg viewBox="0 0 24 24"><rect x="3" y="6" width="18" height="13" rx="2.5"/><path d="M3 10.5h18M7 15h4"/></svg>
         </span>
         <h3 data-i18n="involved.i2Title">Membresía</h3>
@@ -524,8 +525,8 @@
         </a>
       </article>
 
-      <article class="card involve reveal">
-        <span class="p-icon p-coral" aria-hidden="true">
+      <article class="card involve reveal lit-rojo">
+        <span class="p-icon" aria-hidden="true">
           <svg viewBox="0 0 24 24"><path d="M3.5 20V9.5M8 20V4.5h8V20M20.5 20V12"/><path d="M2 20h20"/></svg>
         </span>
         <h3 data-i18n="involved.i3Title">Patrocinio</h3>
@@ -618,7 +619,7 @@
       Para recibir los mensajes en un panel, reemplace el manejo en assets/js/main.js
       por un servicio como Formspree, Netlify Forms o Google Forms.
     -->
-    <form class="card contact-form reveal" id="contactForm" novalidate>
+    <form class="card contact-form reveal lit-azul" id="contactForm" novalidate>
       <div class="field">
         <label for="cf-name" data-i18n="form.name">Nombre</label>
         <input id="cf-name" name="name" type="text" autocomplete="name" required
@@ -671,10 +672,10 @@
     <div class="footer-brand">
       <span class="brand-mark" aria-hidden="true">
         <svg viewBox="0 0 40 40" fill="none">
-          <rect width="40" height="40" rx="11" fill="#0B3A82"/>
-          <rect x="8" y="9" width="24" height="11" rx="2.5" fill="#F2B93B"/>
-          <rect x="8" y="21.5" width="24" height="4.5" rx="1.5" fill="#1348A0"/>
-          <rect x="8" y="27.5" width="24" height="4.5" rx="2.5" fill="#D93B3B"/>
+          <rect width="40" height="40" rx="11" fill="#0B1024"/>
+          <rect x="8" y="9" width="24" height="11" rx="2.5" fill="#FFC72C"/>
+          <rect x="8" y="21.5" width="24" height="4.5" rx="1.5" fill="#1E5BE0"/>
+          <rect x="8" y="27.5" width="24" height="4.5" rx="2.5" fill="#EE3B3B"/>
         </svg>
       </span>
       <p class="footer-name">Colombian Cultural Association</p>
