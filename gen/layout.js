@@ -19,19 +19,31 @@ const NAV = [
   { href: 'contacto.html',      id: 'contacto',  es: 'Contacto',         en: 'Contact' },
 ];
 
-/* Flag-coloured geometry, echoing the panels in the client's own hero.
-   Only three colours — amarillo, azul, rojo, each used once, always fully
-   opaque — stacked top to bottom in the flag's own order and roughly its
-   own proportions (yellow ~50%, blue and red ~25% each). The three regions
-   share exact boundary coordinates with their neighbour, so they tile the
-   box with no gap and no overlap: two different flag colours never sit on
-   top of each other, which is what produced an unwanted orange earlier. */
+/* Flag-coloured heart in the hero, echoing the reference photo the client
+   sent (a heart-shaped Colombia pin/sticker). Built from code, not the
+   client's photo — this session has no way to save an image a client
+   pastes into chat, only to look at it, so the closest honest option is to
+   redraw the same idea. The fill is the same technique as before: three
+   solid, non-overlapping bands (never a translucent one stacked on a
+   different colour, which is what produced the earlier orange) diagonal
+   from upper-left to lower-right — amarillo first and largest, azul next,
+   rojo only a small sliver at the bottom point — then the whole band group
+   is clipped to a heart silhouette instead of left as a plain rectangle. */
 const CUADROS = `
 <div class="cuadros" aria-hidden="true">
-  <svg viewBox="0 0 600 420" preserveAspectRatio="xMaxYMin slice">
-    <polygon points="0,0 600,0 600,170 0,210"     fill="var(--amarillo)"/>
-    <polygon points="0,210 600,170 600,300 0,320" fill="var(--azul)"/>
-    <polygon points="0,320 600,300 600,420 0,420" fill="var(--rojo)"/>
+  <svg viewBox="0 0 600 420" preserveAspectRatio="xMaxYMin meet">
+    <defs>
+      <clipPath id="corazon">
+        <path d="M300 406 C300 406 76 252 76 133 C76 56 139 0 202 0
+                 C244 0 279 21 300 56 C321 21 356 0 398 0
+                 C461 0 524 56 524 133 C524 252 300 406 300 406 Z"/>
+      </clipPath>
+    </defs>
+    <g clip-path="url(#corazon)">
+      <polygon points="0,0 600,0 600,230 0,280"     fill="var(--amarillo)"/>
+      <polygon points="0,280 600,230 600,340 0,370" fill="var(--azul)"/>
+      <polygon points="0,370 600,340 600,420 0,420" fill="var(--rojo)"/>
+    </g>
   </svg>
 </div>`;
 

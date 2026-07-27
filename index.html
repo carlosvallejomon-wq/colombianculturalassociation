@@ -77,10 +77,19 @@
 <section class="hero hero-home" id="inicio">
   
 <div class="cuadros" aria-hidden="true">
-  <svg viewBox="0 0 600 420" preserveAspectRatio="xMaxYMin slice">
-    <polygon points="0,0 600,0 600,170 0,210"     fill="var(--amarillo)"/>
-    <polygon points="0,210 600,170 600,300 0,320" fill="var(--azul)"/>
-    <polygon points="0,320 600,300 600,420 0,420" fill="var(--rojo)"/>
+  <svg viewBox="0 0 600 420" preserveAspectRatio="xMaxYMin meet">
+    <defs>
+      <clipPath id="corazon">
+        <path d="M300 406 C300 406 76 252 76 133 C76 56 139 0 202 0
+                 C244 0 279 21 300 56 C321 21 356 0 398 0
+                 C461 0 524 56 524 133 C524 252 300 406 300 406 Z"/>
+      </clipPath>
+    </defs>
+    <g clip-path="url(#corazon)">
+      <polygon points="0,0 600,0 600,230 0,280"     fill="var(--amarillo)"/>
+      <polygon points="0,280 600,230 600,340 0,370" fill="var(--azul)"/>
+      <polygon points="0,370 600,340 600,420 0,420" fill="var(--rojo)"/>
+    </g>
   </svg>
 </div>
   <div class="shell hero-inner">
