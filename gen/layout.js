@@ -20,18 +20,18 @@ const NAV = [
 ];
 
 /* Flag-coloured geometry, echoing the panels in the client's own hero.
-   Every triangle is fully opaque and none overlaps another: the Colombian
-   flag is yellow, blue and red only, and stacking a translucent shape over
-   a different-hued one (as an earlier version did) renders as orange or
-   olive where they cross. Depth comes from a second shade within the same
-   hue (amarillo-deep, azul-deep), never from blending two flag colours. */
+   Only three colours — amarillo, azul, rojo, each used once, always fully
+   opaque — stacked top to bottom in the flag's own order and roughly its
+   own proportions (yellow ~50%, blue and red ~25% each). The three regions
+   share exact boundary coordinates with their neighbour, so they tile the
+   box with no gap and no overlap: two different flag colours never sit on
+   top of each other, which is what produced an unwanted orange earlier. */
 const CUADROS = `
 <div class="cuadros" aria-hidden="true">
   <svg viewBox="0 0 600 420" preserveAspectRatio="xMaxYMin slice">
-    <polygon points="300,0 600,0 600,150"   fill="var(--amarillo)"/>
-    <polygon points="600,150 600,330 430,240" fill="var(--rojo)"/>
-    <polygon points="300,0 430,240 190,150"  fill="var(--azul)"/>
-    <polygon points="430,240 600,330 470,420" fill="var(--azul-deep)"/>
+    <polygon points="0,0 600,0 600,170 0,210"     fill="var(--amarillo)"/>
+    <polygon points="0,210 600,170 600,300 0,320" fill="var(--azul)"/>
+    <polygon points="0,320 600,300 600,420 0,420" fill="var(--rojo)"/>
   </svg>
 </div>`;
 

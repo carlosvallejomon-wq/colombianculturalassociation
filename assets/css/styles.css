@@ -20,11 +20,11 @@
    1. Tokens
    -------------------------------------------------------------------------- */
 :root {
-  /* Flag, tuned to glow rather than to print */
+  /* Flag, tuned to glow rather than to print. Exactly three colours,
+     each defined once — no second shade of any of them anywhere on
+     the site, so nothing can ever read as a fourth, invented hue. */
   --amarillo:      #FFCE00;
-  --amarillo-deep: #E0A800;   /* second yellow shade, for depth without blending hues */
   --azul:          #14336F;   /* deep navy, per the brand */
-  --azul-deep:     #0A1B3D;
   --rojo:          #CE2027;
 
   /* Readable variants of the same hues, for text and icons on light ground */
@@ -90,9 +90,7 @@
 
 :root[data-theme="dark"] {
   --amarillo:      #FFD84F;
-  --amarillo-deep: #D9A93B;
   --azul:          #3F6FD8;
-  --azul-deep:     #060E22;
   --rojo:          #E8484E;
 
   --amarillo-ink:  #FFE08C;
