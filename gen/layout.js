@@ -19,16 +19,19 @@ const NAV = [
   { href: 'contacto.html',      id: 'contacto',  es: 'Contacto',         en: 'Contact' },
 ];
 
-/* Flag-coloured geometry, echoing the panels in the client's own hero. */
+/* Flag-coloured geometry, echoing the panels in the client's own hero.
+   Every triangle is fully opaque and none overlaps another: the Colombian
+   flag is yellow, blue and red only, and stacking a translucent shape over
+   a different-hued one (as an earlier version did) renders as orange or
+   olive where they cross. Depth comes from a second shade within the same
+   hue (amarillo-deep, azul-deep), never from blending two flag colours. */
 const CUADROS = `
 <div class="cuadros" aria-hidden="true">
   <svg viewBox="0 0 600 420" preserveAspectRatio="xMaxYMin slice">
-    <polygon points="300,0 600,0 600,150"   fill="var(--amarillo)" opacity=".95"/>
-    <polygon points="600,150 600,330 430,240" fill="var(--rojo)"     opacity=".92"/>
-    <polygon points="300,0 430,240 190,150"  fill="var(--azul)"     opacity=".90"/>
-    <polygon points="430,240 600,330 470,420" fill="var(--azul-deep)" opacity=".85"/>
-    <polygon points="600,0 600,150 470,60"   fill="var(--rojo)"     opacity=".55"/>
-    <polygon points="190,150 430,240 250,300" fill="var(--amarillo)" opacity=".45"/>
+    <polygon points="300,0 600,0 600,150"   fill="var(--amarillo)"/>
+    <polygon points="600,150 600,330 430,240" fill="var(--rojo)"/>
+    <polygon points="300,0 430,240 190,150"  fill="var(--azul)"/>
+    <polygon points="430,240 600,330 470,420" fill="var(--azul-deep)"/>
   </svg>
 </div>`;
 
@@ -91,7 +94,6 @@ ${links}
       </button>
     </div>
   </div>
-  <span class="header-ribbon" aria-hidden="true"></span>
 </header>`;
 }
 

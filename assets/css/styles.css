@@ -22,6 +22,7 @@
 :root {
   /* Flag, tuned to glow rather than to print */
   --amarillo:      #FFCE00;
+  --amarillo-deep: #E0A800;   /* second yellow shade, for depth without blending hues */
   --azul:          #14336F;   /* deep navy, per the brand */
   --azul-deep:     #0A1B3D;
   --rojo:          #CE2027;
@@ -89,6 +90,7 @@
 
 :root[data-theme="dark"] {
   --amarillo:      #FFD84F;
+  --amarillo-deep: #D9A93B;
   --azul:          #3F6FD8;
   --azul-deep:     #060E22;
   --rojo:          #E8484E;
@@ -139,7 +141,7 @@
 html {
   -webkit-text-size-adjust: 100%;
   scroll-behavior: smooth;
-  scroll-padding-top: 96px;
+  scroll-padding-top: 112px;   /* 14px floating gap + ~76px pill + breathing room */
 }
 
 body {
@@ -381,30 +383,45 @@ svg { fill: none; stroke: currentColor; stroke-width: 1.7; stroke-linecap: round
 /* --------------------------------------------------------------------------
    6. Header
    -------------------------------------------------------------------------- */
+/* The header is a floating rounded pill, not an edge-to-edge bar: it stays
+   transparent at rest and gains its background, border and shadow only
+   once the page scrolls (.is-stuck) — "que se note cuando hace scroll". */
 .site-header {
   position: sticky;
   top: 0;
   z-index: 100;
-  background: color-mix(in srgb, var(--ground) 55%, transparent);
-  backdrop-filter: blur(18px) saturate(180%);
-  -webkit-backdrop-filter: blur(18px) saturate(180%);
-  border-bottom: 1px solid transparent;
-  transition: border-color var(--dur) var(--ease), box-shadow var(--dur) var(--ease),
-              background-color var(--dur) var(--ease);
+  padding-top: 14px;
+  transition: background-color var(--dur) var(--ease), backdrop-filter var(--dur) var(--ease);
 }
+/* A soft, full-width veil behind the floating pill once scrolled, so page
+   content doesn't peek through the transparent gap above the pill itself. */
 .site-header.is-stuck {
-  background: color-mix(in srgb, var(--ground) 78%, transparent);
-  border-bottom-color: var(--glass-line);
-  box-shadow: 0 10px 30px -22px rgba(11, 16, 36, .5);
+  background: color-mix(in srgb, var(--ground) 45%, transparent);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
 }
 
-.header-inner { display: flex; align-items: center; gap: 1.5rem; min-height: 76px; }
-
-.header-ribbon {
-  display: block;
-  height: 2px;
-  background: linear-gradient(90deg, var(--amarillo) 0 50%, var(--azul) 50% 75%, var(--rojo) 75% 100%);
-  opacity: .9;
+.header-inner {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  min-height: 76px;
+  border-radius: var(--r-pill);
+  border: 1px solid transparent;
+  background: transparent;
+  box-shadow: none;
+  transition: background-color var(--dur) var(--ease), border-color var(--dur) var(--ease),
+              box-shadow var(--dur) var(--ease), backdrop-filter var(--dur) var(--ease);
+}
+.site-header.is-stuck .header-inner {
+  background: color-mix(in srgb, var(--ground) 82%, transparent);
+  backdrop-filter: blur(20px) saturate(190%);
+  -webkit-backdrop-filter: blur(20px) saturate(190%);
+  border-color: var(--glass-line);
+  box-shadow: 0 16px 38px -20px rgba(11, 16, 36, .5), inset 0 1px 0 var(--glass-hi);
+}
+:root[data-theme="dark"] .site-header.is-stuck .header-inner {
+  box-shadow: 0 16px 38px -18px rgba(0, 0, 0, .6), inset 0 1px 0 var(--glass-hi);
 }
 
 .brand { display: inline-flex; align-items: center; gap: .72rem; color: var(--ink); flex: 0 0 auto; }
@@ -1164,13 +1181,13 @@ svg { fill: none; stroke: currentColor; stroke-width: 1.7; stroke-linecap: round
    English labels run wider than the Spanish. Hand over to the drawer above
    that, or the header pushes the page sideways on 1024–1180px laptops. */
 @media (max-width: 1220px) {
-  html { scroll-padding-top: 84px; }
+  html { scroll-padding-top: 100px; }
   .nav-toggle { display: inline-flex; }
   .header-cta { display: none; }
 
   .nav {
     position: fixed;
-    inset: 78px 0 auto;
+    inset: 98px 0 auto;   /* just under the floating pill: 14px gap + ~76px bar + 8px */
     flex-direction: column;
     align-items: stretch;
     gap: .2rem;
