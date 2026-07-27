@@ -21,19 +21,20 @@
    -------------------------------------------------------------------------- */
 :root {
   /* Flag, tuned to glow rather than to print */
-  --amarillo:      #FFC72C;
-  --azul:          #1E5BE0;
-  --rojo:          #EE3B3B;
+  --amarillo:      #FFCE00;
+  --azul:          #14336F;   /* deep navy, per the brand */
+  --azul-deep:     #0A1B3D;
+  --rojo:          #CE2027;
 
   /* Readable variants of the same hues, for text and icons on light ground */
-  --amarillo-ink:  #6F4B06;
-  --azul-ink:      #12409E;
-  --rojo-ink:      #BE2626;
+  --amarillo-ink:  #5C3E05;
+  --azul-ink:      #14336F;
+  --rojo-ink:      #B01C22;
 
   /* Glow triplets, consumed as rgb(var(--x) / a) */
-  --rgb-amarillo:  255 199 44;
-  --rgb-azul:      30 91 224;
-  --rgb-rojo:      238 59 59;
+  --rgb-amarillo:  255 206 0;
+  --rgb-azul:      20 51 111;
+  --rgb-rojo:      206 32 39;
 
   /* Ground — neutrals biased blue so they belong to the flag's world */
   --ground:        #E9EDF9;
@@ -60,9 +61,9 @@
   --rim:           .34;   /* coloured rim on the panel edge  */
 
   --btn-fg-on-azul: #FFFFFF;
-  --btn-azul:       #1541A8;
+  --btn-azul:       #14336F;
 
-  --ring: rgba(30, 91, 224, .55);
+  --ring: rgba(20, 51, 111, .60);
 
   /* Radii — generous, glass reads as thick slabs */
   --r-sm: 10px;
@@ -87,20 +88,21 @@
 }
 
 :root[data-theme="dark"] {
-  --amarillo:      #FFD24D;
-  --azul:          #5B8CFF;
-  --rojo:          #FF5C5C;
+  --amarillo:      #FFD84F;
+  --azul:          #3F6FD8;
+  --azul-deep:     #060E22;
+  --rojo:          #E8484E;
 
   --amarillo-ink:  #FFE08C;
   --azul-ink:      #A6C0FF;
   --rojo-ink:      #FF9E9E;
 
-  --rgb-amarillo:  255 210 77;
-  --rgb-azul:      91 140 255;
-  --rgb-rojo:      255 92 92;
+  --rgb-amarillo:  255 216 79;
+  --rgb-azul:      63 111 216;
+  --rgb-rojo:      232 72 78;
 
-  --ground:        #070B1A;
-  --ground-2:      #0A1024;
+  --ground:        #050914;
+  --ground-2:      #080E20;
 
   --ink:           #EDF1FB;
   --ink-soft:      #C3CBE2;
@@ -118,7 +120,7 @@
   --tint-b:        .03;
   --rim:           .30;
 
-  --btn-azul:      #2F6BEA;
+  --btn-azul:      #2A5BC4;
   --ring: rgba(140, 175, 255, .65);
 
   color-scheme: dark;
@@ -1068,7 +1070,9 @@ svg { fill: none; stroke: currentColor; stroke-width: 1.7; stroke-linecap: round
 .footer-brand .brand-mark { width: 42px; height: 42px; margin-bottom: 1.15rem; }
 .footer-name { font-size: 1.16rem; font-weight: 800; letter-spacing: -.028em; }
 .footer-tag { max-width: 34ch; margin-top: .6rem; color: var(--ink-soft); font-size: .93rem; }
-.footer-legal { margin-top: 1.1rem; color: var(--ink-muted); font-size: .82rem; }
+/* --ink-soft rather than --ink-muted: this line sits over the footer's
+   lightest gradient patch, where the muted tone falls just under AA. */
+.footer-legal { margin-top: 1.1rem; color: var(--ink-soft); font-size: .82rem; }
 
 .footer-nav { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 2rem; }
 .footer-nav > div { display: flex; flex-direction: column; gap: .6rem; }
@@ -1118,14 +1122,23 @@ svg { fill: none; stroke: currentColor; stroke-width: 1.7; stroke-linecap: round
 :root[data-theme="dark"] .ticket-top {
   background:
     linear-gradient(150deg, rgb(var(--rgb-amarillo) / .16), rgb(var(--rgb-rojo) / .08) 70%, transparent),
-    rgba(7, 11, 26, .55);
+    rgba(5, 9, 20, .58);
 }
 :root[data-theme="dark"] .ev-date {
   background:
     linear-gradient(0deg, rgb(var(--rgb) / .16), rgb(var(--rgb) / .16)),
-    rgba(7, 11, 26, .55);
+    rgba(5, 9, 20, .58);
 }
-:root[data-theme="dark"] .support-ein { background: rgba(7, 11, 26, .55); }
+:root[data-theme="dark"] .support-ein { background: rgba(5, 9, 20, .58); }
+
+/* .btn-ghost sits on whichever panel it's placed on — often a coloured
+   lit-* band. Semi-transparent white glass reads fine on the plain dark
+   ground, but on top of a bright amarillo tint it lightens enough that
+   near-white --ink text drops below AA. Give it its own opaque dark base. */
+:root[data-theme="dark"] .btn-ghost,
+:root[data-theme="dark"] .btn-outline-light {
+  --btn-bg: rgba(5, 9, 20, .62);
+}
 
 /* --------------------------------------------------------------------------
    16. Fallbacks
@@ -1236,4 +1249,127 @@ svg { fill: none; stroke: currentColor; stroke-width: 1.7; stroke-linecap: round
   .site-header, .marquee, .nav, .support-actions, .contact-form, .luminaria { display: none; }
   body { background: #fff; color: #000; }
   .card, .event, .ticket, .support-inner { box-shadow: none; border-color: #bbb; background: #fff; backdrop-filter: none; }
+}
+
+/* ==========================================================================
+   19. Pages beyond the home page
+   Added when the site grew from one page to seven.
+   ========================================================================== */
+
+/* --- Flag geometry in the hero ("los cuadros") --------------------------- */
+.cuadros {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: min(52%, 640px);
+  height: 100%;
+  max-height: 460px;
+  z-index: -1;
+  pointer-events: none;
+  opacity: .92;
+  -webkit-mask-image: linear-gradient(255deg, #000 46%, transparent 88%);
+  mask-image: linear-gradient(255deg, #000 46%, transparent 88%);
+}
+.cuadros svg { width: 100%; height: 100%; display: block; }
+.cuadros polygon { stroke: none; }
+:root[data-theme="dark"] .cuadros { opacity: .55; }
+
+.hero-home { padding-block: clamp(4rem, 9vw, 7.5rem) clamp(3.5rem, 7vw, 6rem); }
+
+/* Inner pages get a shorter hero than the home page */
+.hero-inner-page { padding-block: clamp(3rem, 6vw, 5rem) clamp(2rem, 4vw, 3rem); }
+.hero-title-sm { font-size: clamp(2.2rem, 1.3rem + 4vw, 3.9rem); }
+.hero-inner-page .hero-lead { margin-top: 1.3rem; }
+
+/* --- Photo gallery ------------------------------------------------------- */
+.galeria {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+  gap: clamp(.9rem, 1.8vw, 1.35rem);
+}
+
+.foto {
+  position: relative;
+  margin: 0;
+  border-radius: var(--r-lg);
+  overflow: hidden;
+  border: 1px solid var(--glass-line);
+  /* Visible while the photograph loads, and if it is missing entirely */
+  background: linear-gradient(150deg, rgb(var(--rgb-amarillo) / .22), rgb(var(--rgb-azul) / .18));
+  box-shadow: var(--lift), 0 26px 50px -26px rgb(var(--rgb-azul) / .5);
+  transition: transform .35s var(--ease), box-shadow .35s var(--ease);
+}
+.foto:hover { transform: translateY(-5px); box-shadow: var(--lift), 0 38px 66px -26px rgb(var(--rgb-azul) / .62); }
+
+.foto img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  min-height: 240px;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+}
+/* main.js adds this when a photograph fails to load, so visitors get the
+   caption on a coloured panel instead of a broken-image icon. */
+.foto.sin-foto img { display: none; }
+.foto.sin-foto { min-height: 240px; display: grid; place-items: end stretch; }
+
+.foto figcaption {
+  position: absolute;
+  inset-inline: 0;
+  bottom: 0;
+  padding: 2.4rem .9rem .8rem;
+  background: linear-gradient(transparent, rgba(5, 9, 20, .82));
+  color: #fff;
+  font-size: .855rem;
+  font-weight: 600;
+  letter-spacing: -.01em;
+}
+
+/* A single framed photograph beside text */
+.foto-card { padding: 0; overflow: hidden; }
+.foto-card img { display: block; width: 100%; aspect-ratio: 4 / 3; object-fit: cover; }
+.foto-card figcaption { padding: 1rem 1.3rem 1.2rem; color: var(--ink-muted); font-size: .875rem; }
+.foto-card.sin-foto img { display: none; }
+
+/* --- Assistance pages ---------------------------------------------------- */
+.ayuda { margin-bottom: clamp(1.4rem, 2.6vw, 2.1rem); }
+.ayuda:last-of-type { margin-bottom: 0; }
+.ayuda h2 { margin-bottom: .7rem; font-size: clamp(1.4rem, 1.1rem + 1.1vw, 1.85rem); }
+.ayuda > p { max-width: 68ch; color: var(--ink-soft); }
+.ayuda .btn { margin-top: 1.4rem; }
+
+.nota {
+  margin-top: 1rem;
+  padding: .85rem 1.1rem;
+  border-left: 3px solid rgb(var(--rgb) / .55);
+  border-radius: 0 var(--r-sm) var(--r-sm) 0;
+  background: rgb(var(--rgb) / .09);
+  color: var(--ink-soft);
+  font-size: .93rem;
+}
+
+/* The TANF list reads as a checklist, two or three columns wide */
+.feature-grid {
+  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+  margin-top: 1.5rem;
+}
+
+/* Legal / scope disclaimer */
+.aviso {
+  margin-top: clamp(1.8rem, 3vw, 2.6rem);
+  padding: 1.1rem 1.3rem;
+  border: 1px dashed var(--glass-line);
+  border-radius: var(--r-md);
+  color: var(--ink-muted);
+  font-size: .9rem;
+}
+
+/* --- Support band on inner pages ---------------------------------------- */
+.support-inner .eyebrow { color: var(--ink-muted); }
+
+@media (max-width: 620px) {
+  .cuadros { width: 62%; max-height: 300px; opacity: .8; }
+  .galeria { grid-template-columns: 1fr 1fr; }
+  .foto img { min-height: 180px; }
 }

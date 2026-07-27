@@ -1,0 +1,22 @@
+FOTOS DEL SITIO
+===============
+
+Copia aquí los archivos de imagen con EXACTAMENTE estos nombres.
+Mientras falte alguno, la web muestra un panel de color con el texto
+(no se rompe nada).
+
+  galeria-1.jpg   Santuario de Las Lajas, Nariño
+  galeria-2.jpg   Bogotá al atardecer
+  galeria-3.jpg   Torre del Reloj, Cartagena
+  galeria-4.jpg   Cristo Rey, Cali
+  galeria-5.jpg   Cerro de Monserrate, Bogotá
+  consulado.jpg   Edificio del Consulado de Colombia en Dallas
+
+Recomendaciones
+---------------
+- Formato vertical (aprox. 800 x 1000 px) para las de galería.
+- Formato horizontal (aprox. 800 x 600 px) para consulado.jpg.
+- Guárdalas comprimidas: menos de 300 KB cada una para que la
+  página cargue rápido en el celular.
+- Si cambias un nombre de archivo, cámbialo también en el HTML
+  de las páginas donde aparece.
