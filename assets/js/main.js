@@ -599,13 +599,23 @@
   var motionOK = !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   var finePointer = window.matchMedia('(pointer: fine)').matches;
 
-  /* --- Lights: pointer parallax + scroll drift ---------------------------- */
+  /* --- Lights: pointer parallax only ---------------------------------------
+     A scroll-linked drift used to live here too. On a short page it read as
+     a nice subtle effect; on a long one it was a real bug — the backdrop is
+     position:fixed (deliberately, so it reads as a constant atmosphere
+     rather than something that scrolls away), and amarillo sits anchored
+     near the top of that fixed box while rojo sits anchored near the
+     bottom. Scrolled deep into a tall page, the drift pushed amarillo
+     further past the top edge while pulling rojo further into frame,
+     so the intended amarillo-dominant/left, azul-and-rojo/right balance
+     collapsed into "almost all rojo" by the time you reached the footer.
+     Positions are set once in CSS and stay put; only the pointer nudges
+     them now, which does not accumulate with how far down the page you are. */
   var luces = document.querySelectorAll('.luz');
 
-  if (luces.length && motionOK) {
+  if (luces.length && motionOK && finePointer) {
     var pointerX = 0, pointerY = 0;   // -0.5 .. 0.5, eased toward the target
     var targetX = 0, targetY = 0;
-    var scrollY = 0;
     var frame = null;
 
     var render = function () {
@@ -618,11 +628,6 @@
         var depth = parseFloat(luz.getAttribute('data-depth')) || 20;
         luz.style.setProperty('--px', (pointerX * depth).toFixed(2));
         luz.style.setProperty('--py', (pointerY * depth).toFixed(2));
-        // Lights drift slowly as the page scrolls. The factor is tiny and the
-        // result clamped: the backdrop is fixed, so anything larger walks the
-        // lights straight out of the viewport and the page goes flat.
-        var drift = scrollY * depth * -0.0006;
-        luz.style.setProperty('--sy', Math.max(-90, Math.min(90, drift)).toFixed(2));
       });
 
       // Keep animating only while the easing is still visibly moving.
@@ -631,16 +636,9 @@
 
     var request = function () { if (frame === null) frame = requestAnimationFrame(render); };
 
-    if (finePointer) {
-      window.addEventListener('pointermove', function (e) {
-        targetX = e.clientX / window.innerWidth - 0.5;
-        targetY = e.clientY / window.innerHeight - 0.5;
-        request();
-      }, { passive: true });
-    }
-
-    window.addEventListener('scroll', function () {
-      scrollY = window.scrollY;
+    window.addEventListener('pointermove', function (e) {
+      targetX = e.clientX / window.innerWidth - 0.5;
+      targetY = e.clientY / window.innerHeight - 0.5;
       request();
     }, { passive: true });
 
