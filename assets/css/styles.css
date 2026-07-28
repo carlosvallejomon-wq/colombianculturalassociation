@@ -1298,9 +1298,10 @@ svg { fill: none; stroke: currentColor; stroke-width: 1.7; stroke-linecap: round
   object-fit: contain;
   /* No clip-path here on purpose. The artwork used to be a JPEG on an
      opaque white card and had to be cropped to hide that rectangle, which
-     also shaved the edges of the drawing. It is now a WebP whose white
-     background was removed to real transparency, so it composites cleanly
-     on any ground and the full shape survives. */
+     also shaved the edges of the drawing. It is now a WebP keyed down to
+     the flag brush strokes alone — the white sticker plate and its grey
+     outline are gone — so it composites cleanly on any ground and the full
+     shape survives. See gen/quitar-fondo.js. */
 }
 /* Slightly dimmed in dark mode so the bright yellow does not glare against
    the near-black ground. */
