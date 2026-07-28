@@ -1,5 +1,5 @@
 const { t, ns } = require('./content');
-const { page, pageHero, CUADROS, FOTOS } = require('./layout');
+const { page, pageHero, CUADROS, FOTOS, MOSAICO } = require('./layout');
 
 /* Reusable bits ---------------------------------------------------------- */
 
@@ -160,9 +160,18 @@ function quienes() {
         </figcaption>
       </aside>
     </div>
+
+    <figure class="card mosaico reveal lit-azul">
+      <img src="assets/img/${MOSAICO.file}" alt="${MOSAICO.es}" loading="lazy" decoding="async" width="375" height="600"
+           data-i18n-attr="alt:qs.mosaicoAlt">
+      <figcaption data-i18n="qs.mosaico">${t('mosaico',
+        'Arquitectura, café, sombreros vueltiaos, artesanía y baile: la Colombia que llevamos a Dallas.',
+        'Architecture, coffee, sombreros vueltiaos, crafts and dance: the Colombia we bring to Dallas.')}</figcaption>
+    </figure>
   </div>
 </section>
 ${ctaBand()}`;
+  t('mosaicoAlt', MOSAICO.es, MOSAICO.en);
 
   return page({
     id: 'quienes',

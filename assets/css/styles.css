@@ -1270,23 +1270,41 @@ svg { fill: none; stroke: currentColor; stroke-width: 1.7; stroke-linecap: round
    Added when the site grew from one page to seven.
    ========================================================================== */
 
-/* --- Flag geometry in the hero ("los cuadros") --------------------------- */
+/* --- The client's heart-flag artwork in the hero ------------------------- */
 .cuadros {
   position: absolute;
-  top: 0;
-  right: 0;
-  width: min(52%, 640px);
-  height: 100%;
-  max-height: 460px;
+  top: 50%;
+  right: clamp(1rem, 3vw, 3rem);
+  transform: translateY(-50%);
+  width: min(30%, 340px);
   z-index: -1;
   pointer-events: none;
-  opacity: .92;
-  -webkit-mask-image: linear-gradient(255deg, #000 46%, transparent 88%);
-  mask-image: linear-gradient(255deg, #000 46%, transparent 88%);
+  display: grid;
+  place-items: center;
 }
-.cuadros svg { width: 100%; height: 100%; display: block; }
-.cuadros polygon { stroke: none; }
-:root[data-theme="dark"] .cuadros { opacity: .55; }
+/* Keep the hero text clear of the artwork so the two never collide. The
+   heart is decorative, so below this width it simply steps aside. */
+@media (min-width: 900px) {
+  .hero-home .hero-inner,
+  .hero-inner-page .hero-inner { padding-right: min(34%, 400px); }
+}
+@media (max-width: 899px) {
+  .cuadros { display: none; }
+}
+.cuadros img {
+  width: 100%;
+  height: auto;
+  max-height: 100%;
+  object-fit: contain;
+  /* The artwork is a JPEG on an opaque white card, so there is no alpha to
+     composite away. Clip to the heart's own silhouette to drop that white
+     rectangle. Percentage-based, so the crop tracks the rendered size —
+     a path() in absolute user units stays fixed while the image scales,
+     which sliced the heart in half at the displayed width. */
+  -webkit-clip-path: ellipse(48% 46% at 50% 46%);
+  clip-path: ellipse(48% 46% at 50% 46%);
+}
+:root[data-theme="dark"] .cuadros img { filter: brightness(.92); }
 
 .hero-home { padding-block: clamp(4rem, 9vw, 7.5rem) clamp(3.5rem, 7vw, 6rem); }
 
@@ -1386,4 +1404,29 @@ svg { fill: none; stroke: currentColor; stroke-width: 1.7; stroke-linecap: round
   .cuadros { width: 62%; max-height: 300px; opacity: .8; }
   .galeria { grid-template-columns: 1fr 1fr; }
   .foto img { min-height: 180px; }
+}
+
+/* --- The client's photo collage on the About page ------------------------ */
+.mosaico {
+  display: grid;
+  grid-template-columns: minmax(0, 340px) 1fr;
+  gap: clamp(1.2rem, 3vw, 2.2rem);
+  align-items: center;
+  margin-top: clamp(1.4rem, 2.6vw, 2.1rem);
+  padding: clamp(1.2rem, 2.4vw, 1.8rem);
+}
+.mosaico img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: var(--r-md);
+}
+.mosaico figcaption {
+  color: var(--ink-soft);
+  font-size: clamp(1rem, .95rem + .35vw, 1.18rem);
+  line-height: 1.5;
+}
+
+@media (max-width: 720px) {
+  .mosaico { grid-template-columns: 1fr; }
 }

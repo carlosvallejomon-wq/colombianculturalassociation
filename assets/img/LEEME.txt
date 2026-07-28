@@ -1,22 +1,57 @@
 FOTOS DEL SITIO
 ===============
 
-Copia aquí los archivos de imagen con EXACTAMENTE estos nombres.
-Mientras falte alguno, la web muestra un panel de color con el texto
-(no se rompe nada).
+Esta lista dice dónde aparece cada imagen, por si quieres reemplazarlas
+más adelante.
 
-  galeria-1.jpg   Santuario de Las Lajas, Nariño
-  galeria-2.jpg   Bogotá al atardecer
-  galeria-3.jpg   Torre del Reloj, Cartagena
-  galeria-4.jpg   Cristo Rey, Cali
-  galeria-5.jpg   Cerro de Monserrate, Bogotá
-  consulado.jpg   Edificio del Consulado de Colombia en Dallas
+YA ESTÁN PUESTAS
+----------------
 
-Recomendaciones
----------------
-- Formato vertical (aprox. 800 x 1000 px) para las de galería.
-- Formato horizontal (aprox. 800 x 600 px) para consulado.jpg.
-- Guárdalas comprimidas: menos de 300 KB cada una para que la
-  página cargue rápido en el celular.
-- Si cambias un nombre de archivo, cámbialo también en el HTML
-  de las páginas donde aparece.
+  corazon.jpg      El corazón con la bandera. Aparece arriba a la derecha
+                   en TODAS las páginas.
+
+  galeria-1.jpg    Santuario de Las Lajas, Nariño
+  galeria-2.jpg    Bogotá al atardecer
+  galeria-3.jpg    Torre del Reloj, Cartagena
+  galeria-4.jpg    Cristo Rey, Cali
+  galeria-5.jpg    Cerro de Monserrate, Bogotá
+  galeria-6.jpg    Vallenato en vivo junto al mar
+  galeria-7.jpg    Sombreros vueltiaos y artesanías
+  galeria-8.jpg    Centro histórico de Bogotá
+  galeria-9.jpg    Palenquera de Cartagena
+  galeria-10.jpg   Mochilas wayuu en el mercado
+                   -> Estas 10 forman la galería "Colombia, siempre
+                      presente", que sale en Inicio y en Cultura.
+
+  galeria-11.jpg   El collage de varias fotos. Va solo, en la página
+                   "Quiénes somos", con un texto al lado.
+
+
+GUARDADA PERO SIN USAR
+----------------------
+
+  bandera.jpg      El mapa de Colombia con la bandera. Está subida pero
+                   todavía no aparece en ninguna página.
+                   Dime dónde te gustaría que la coloque.
+
+
+TODAVÍA FALTA
+-------------
+
+  consulado.jpg    Foto del edificio del Consulado, para la página
+                   "Consulado". Mientras no esté, esa página muestra un
+                   panel de color con el texto (no se ve rota).
+                   Formato horizontal, aprox. 800 x 600 px.
+
+
+Para cambiar una foto
+---------------------
+Sube el archivo nuevo con EXACTAMENTE el mismo nombre, reemplazando el
+anterior. No hay que tocar nada del código.
+
+Para cambiar el texto que aparece sobre cada foto se edita la lista FOTOS
+al inicio de  gen/layout.js  y luego se ejecuta:  node gen/build.js
+
+Recomendación
+-------------
+Menos de 300 KB por foto, para que la página cargue rápido en el celular.

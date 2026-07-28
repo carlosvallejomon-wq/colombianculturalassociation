@@ -1,13 +1,29 @@
 const { t, key, ns } = require('./content');
 
-/* The five photographs supplied by the client, in gallery order. */
+/* The eleven photographs supplied by the client, in gallery order.
+   Captions were written after opening each file, so they describe what is
+   actually in the frame rather than assuming the upload order. */
 const FOTOS = [
-  { file: 'galeria-1.jpg', es: 'Santuario de Las Lajas, Nariño', en: 'Las Lajas Sanctuary, Nariño' },
-  { file: 'galeria-2.jpg', es: 'Bogotá al atardecer', en: 'Bogotá at sunset' },
-  { file: 'galeria-3.jpg', es: 'Torre del Reloj, Cartagena', en: 'Clock Tower, Cartagena' },
-  { file: 'galeria-4.jpg', es: 'Cristo Rey, Cali', en: 'Cristo Rey, Cali' },
-  { file: 'galeria-5.jpg', es: 'Cerro de Monserrate, Bogotá', en: 'Monserrate, Bogotá' },
+  { file: 'galeria-1.jpg',  es: 'Santuario de Las Lajas, Nariño',      en: 'Las Lajas Sanctuary, Nariño' },
+  { file: 'galeria-2.jpg',  es: 'Bogotá al atardecer',                 en: 'Bogotá at sunset' },
+  { file: 'galeria-3.jpg',  es: 'Torre del Reloj, Cartagena',          en: 'Clock Tower, Cartagena' },
+  { file: 'galeria-4.jpg',  es: 'Cristo Rey, Cali',                    en: 'Cristo Rey, Cali' },
+  { file: 'galeria-5.jpg',  es: 'Cerro de Monserrate, Bogotá',         en: 'Monserrate, Bogotá' },
+  { file: 'galeria-6.jpg',  es: 'Vallenato en vivo junto al mar',      en: 'Live vallenato by the sea' },
+  { file: 'galeria-7.jpg',  es: 'Sombreros vueltiaos y artesanías',    en: 'Sombreros vueltiaos and crafts' },
+  { file: 'galeria-8.jpg',  es: 'Centro histórico de Bogotá',          en: 'Historic centre of Bogotá' },
+  { file: 'galeria-9.jpg',  es: 'Palenquera de Cartagena',             en: 'Palenquera of Cartagena' },
+  { file: 'galeria-10.jpg', es: 'Mochilas wayuu en el mercado',        en: 'Wayuu bags at the market' },
 ];
+
+/* galeria-11.jpg is itself a collage of nine photos rather than a single
+   scene, so it reads badly in the uniform grid (and left an orphan on its
+   own row). It is used on its own further down instead — see MOSAICO. */
+const MOSAICO = {
+  file: 'galeria-11.jpg',
+  es: 'Nuestra cultura en imágenes',
+  en: 'Our culture in pictures',
+};
 
 const NAV = [
   { href: 'index.html',         id: 'inicio',    es: 'Inicio',           en: 'Home' },
@@ -19,32 +35,14 @@ const NAV = [
   { href: 'contacto.html',      id: 'contacto',  es: 'Contacto',         en: 'Contact' },
 ];
 
-/* Flag-coloured heart in the hero, echoing the reference photo the client
-   sent (a heart-shaped Colombia pin/sticker). Built from code, not the
-   client's photo — this session has no way to save an image a client
-   pastes into chat, only to look at it, so the closest honest option is to
-   redraw the same idea. The fill is the same technique as before: three
-   solid, non-overlapping bands (never a translucent one stacked on a
-   different colour, which is what produced the earlier orange) diagonal
-   from upper-left to lower-right — amarillo first and largest, azul next,
-   rojo only a small sliver at the bottom point — then the whole band group
-   is clipped to a heart silhouette instead of left as a plain rectangle. */
+/* The hero mark: the client's own heart-flag artwork, now that they have
+   uploaded it to assets/img/. This replaces an SVG heart that was drawn
+   from code as a stand-in while the real file was unavailable.
+   Decorative, so aria-hidden and an empty alt keep it out of the
+   accessibility tree — the heading beside it already carries the meaning. */
 const CUADROS = `
 <div class="cuadros" aria-hidden="true">
-  <svg viewBox="0 0 600 420" preserveAspectRatio="xMaxYMin meet">
-    <defs>
-      <clipPath id="corazon">
-        <path d="M300 406 C300 406 76 252 76 133 C76 56 139 0 202 0
-                 C244 0 279 21 300 56 C321 21 356 0 398 0
-                 C461 0 524 56 524 133 C524 252 300 406 300 406 Z"/>
-      </clipPath>
-    </defs>
-    <g clip-path="url(#corazon)">
-      <polygon points="0,0 600,0 600,230 0,280"     fill="var(--amarillo)"/>
-      <polygon points="0,280 600,230 600,340 0,370" fill="var(--azul)"/>
-      <polygon points="0,370 600,340 600,420 0,420" fill="var(--rojo)"/>
-    </g>
-  </svg>
+  <img src="assets/img/corazon.jpg" alt="" loading="eager" decoding="async" width="900" height="900">
 </div>`;
 
 const MARK = `<svg viewBox="0 0 40 40" fill="none">
@@ -206,4 +204,4 @@ function pageHero(eyebrowKey, titleKey, leadKey, eyebrow, title, lead) {
 </section>`;
 }
 
-module.exports = { page, pageHero, CUADROS, FOTOS, NAV, MARK };
+module.exports = { page, pageHero, CUADROS, FOTOS, MOSAICO, NAV, MARK };
