@@ -42,7 +42,7 @@ const NAV = [
    accessibility tree — the heading beside it already carries the meaning. */
 const CUADROS = `
 <div class="cuadros" aria-hidden="true">
-  <img src="assets/img/corazon.webp" alt="" loading="eager" decoding="async" width="700" height="700">
+  <img src="assets/img/corazon.webp" alt="" loading="eager" decoding="async" width="900" height="900">
 </div>`;
 
 const MARK = `<svg viewBox="0 0 40 40" fill="none">
