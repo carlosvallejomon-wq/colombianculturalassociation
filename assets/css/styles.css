@@ -910,7 +910,9 @@ svg { fill: none; stroke: currentColor; stroke-width: 1.7; stroke-linecap: round
   border: 1px solid rgb(var(--rgb) / .3);
   background: rgb(var(--rgb) / .14);
   color: var(--ink-hue, var(--azul-ink));
-  font-size: .705rem;
+  /* Matches the eyebrow. Below this, uppercase tracked labels get hard to
+     read on a phone — these were the two smallest strings on the site. */
+  font-size: .76rem;
   font-weight: 800;
   letter-spacing: .1em;
   text-transform: uppercase;
@@ -1017,7 +1019,7 @@ svg { fill: none; stroke: currentColor; stroke-width: 1.7; stroke-linecap: round
 .c-icon svg { width: 19px; height: 19px; }
 .c-label {
   margin-bottom: .2rem;
-  font-size: .715rem;
+  font-size: .76rem;
   font-weight: 700;
   letter-spacing: .14em;
   text-transform: uppercase;
@@ -1038,7 +1040,10 @@ svg { fill: none; stroke: currentColor; stroke-width: 1.7; stroke-linecap: round
   background: var(--glass-strong);
   color: var(--ink);
   font: inherit;
-  font-size: .96rem;
+  /* Never below 16px: Safari on iOS zooms the whole page in when a field
+     with smaller text takes focus, and it does not zoom back out, leaving
+     the form scrolled sideways mid-entry. */
+  font-size: max(1rem, .96rem);
   transition: border-color .2s var(--ease), box-shadow .2s var(--ease);
 }
 .field textarea { resize: vertical; min-height: 120px; }
@@ -1205,7 +1210,11 @@ svg { fill: none; stroke: currentColor; stroke-width: 1.7; stroke-linecap: round
     gap: .2rem;
     margin: 0;
     padding: 1rem var(--gutter) 1.6rem;
-    background: color-mix(in srgb, var(--ground) 88%, transparent);
+    /* Nearly solid on purpose. At 88% the hero's heading showed straight
+       through the menu items and the labels became hard to pick out — a
+       drawer is a surface you read against, not a decorative panel. The
+       remaining translucency and the blur only soften its edges. */
+    background: color-mix(in srgb, var(--ground) 97%, transparent);
     backdrop-filter: blur(24px) saturate(170%);
     -webkit-backdrop-filter: blur(24px) saturate(170%);
     border-bottom: 1px solid var(--glass-line);
@@ -1259,6 +1268,38 @@ svg { fill: none; stroke: currentColor; stroke-width: 1.7; stroke-linecap: round
   .luz { filter: blur(56px); }
 }
 
+/* A finger needs a bigger target than a mouse pointer: the header controls
+   were down to 29px tall on a phone, against the 44px Apple asks for. Keyed
+   to the pointer rather than the width, so a touch laptop gets it and a
+   narrow desktop window does not.
+
+   They grow downward — the header band is 90px tall, with room to spare —
+   and sideways only into the gap that already separates them. Widening them
+   properly is not an option: at 375px the header has about 8px of
+   horizontal slack in total. For the icon buttons the target is an
+   invisible overlay rather than the button itself, so the visible pill
+   keeps its size while the tappable area does not.
+
+   Must stay after the 620px block above, which sizes these same controls
+   down; a media query carries no extra specificity, so source order is what
+   decides. */
+@media (pointer: coarse) {
+  .lang-switch button { padding-block: .6rem; }
+
+  .icon-btn { position: relative; }
+  .icon-btn::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    translate: -50% -50%;
+    width: calc(100% + .35rem);
+    height: 44px;
+  }
+
+  .brand { padding-block: .4rem; }
+}
+
 /* --------------------------------------------------------------------------
    18. Motion & print
    -------------------------------------------------------------------------- */
@@ -1309,7 +1350,7 @@ svg { fill: none; stroke: currentColor; stroke-width: 1.7; stroke-linecap: round
   place-items: center;
 }
 /* Keep the hero text clear of the artwork so the two never collide. Below
-   900px the artwork is hidden entirely and no reserve is needed.
+   700px the artwork is hidden entirely and no reserve is needed.
 
    The reserve is derived from where the artwork actually is, not from a
    percentage of the text column. Those are different things: the artwork is
@@ -1332,9 +1373,14 @@ svg { fill: none; stroke: currentColor; stroke-width: 1.7; stroke-linecap: round
    invisible on screen but makes anything sampling an element's background
    (the contrast audit, for one) read the heart's yellow where no text is
    drawn. */
-@media (min-width: 900px) {
-  .hero-home { --arte-ancho: min(48vw, 660px); }
-  .hero-inner-page { --arte-ancho: min(35vw, 440px); }
+@media (min-width: 700px) {
+  /* Scaled rather than a flat cap so a tablet in portrait keeps the artwork
+     instead of dropping it: at 900px the old min(48vw, …) came out wide
+     enough that "Colombiana" — a word that cannot break — would have run
+     under the heart. Desktop is unchanged in practice (598px at 1280
+     against the previous 614). */
+  .hero-home { --arte-ancho: clamp(280px, 60vw - 170px, 660px); }
+  .hero-inner-page { --arte-ancho: clamp(220px, 48vw - 170px, 440px); }
   /* Only the home hero carries the stats slab at its foot, and centred the
      heart's point landed 1px off it. Raising it on every hero instead would
      have forced the inner bands taller to avoid clipping the top, adding
@@ -1357,7 +1403,10 @@ svg { fill: none; stroke: currentColor; stroke-width: 1.7; stroke-linecap: round
   .hero-home .hero-inner > :not(.hero-stats, .eyebrow),
   .hero-inner-page .hero-inner > :not(.eyebrow) { max-width: min(100%, var(--texto-max)); }
 }
-@media (max-width: 899px) {
+/* Below this the hero is a single column and there is no room beside the
+   text, so the artwork steps aside. Above it — every iPad in portrait
+   included — it stays. */
+@media (max-width: 699px) {
   .cuadros { display: none; }
 }
 .cuadros img {
@@ -1384,21 +1433,22 @@ svg { fill: none; stroke: currentColor; stroke-width: 1.7; stroke-linecap: round
 .hero-inner-page .hero-lead { margin-top: 1.3rem; }
 
 /* An inner-page hero is roughly half the height of the home one, so the
-   full-size artwork would be cropped through its middle and stop reading as
-   a heart. Once the artwork is actually shown (900px up), give these bands
-   more air and scale it to what fits inside them. This has to sit after the
-   .hero-inner-page rule above: a media query adds no specificity, so an
-   earlier block at equal specificity would simply lose. */
+   artwork has to be given room or .hero's overflow cuts it — the top of the
+   heart was being clipped by 6-7px on a portrait iPad.
+
+   The floor is derived from the artwork rather than fixed: anchored at 46%
+   with the artwork centred on that point, the band needs at least
+   width/0.92, and a couple of rem so the point does not sit on the edge. A
+   fixed value has to be set for the widest case, which then opens dead
+   space under the text everywhere the artwork is smaller.
+
+   Has to sit after the .hero-inner-page rule above: a media query adds no
+   specificity, so an earlier block at equal specificity would lose. */
+@media (min-width: 700px) {
+  .hero-inner-page { min-height: calc(var(--arte-ancho) / 0.92 + 2rem); }
+}
 @media (min-width: 900px) {
-  .hero-inner-page {
-    padding-block: clamp(4rem, 7vw, 6.5rem) clamp(3rem, 5vw, 4.5rem);
-    /* Tall enough to hold the artwork at its raised position. Anchored at
-       46% with the artwork centred on that point, the band needs to be at
-       least width/0.92 for the top not to be cut by .hero's overflow. */
-    min-height: 31rem;
-  }
-  /* Keep in step with --arte-ancho above, which the text reserve reads. */
-  .hero-inner-page .cuadros { width: min(35%, 440px); }
+  .hero-inner-page { padding-block: clamp(4rem, 7vw, 6.5rem) clamp(3rem, 5vw, 4.5rem); }
 }
 
 /* --- Photo gallery ------------------------------------------------------- */
