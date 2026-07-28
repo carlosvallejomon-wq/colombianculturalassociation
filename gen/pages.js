@@ -164,9 +164,22 @@ function quienes() {
     <figure class="card mosaico reveal lit-azul">
       <img src="assets/img/${MOSAICO.file}" alt="${MOSAICO.es}" loading="lazy" decoding="async" width="375" height="600"
            data-i18n-attr="alt:qs.mosaicoAlt">
-      <figcaption data-i18n="qs.mosaico">${t('mosaico',
-        'Arquitectura, café, sombreros vueltiaos, artesanía y baile: la Colombia que llevamos a Dallas.',
-        'Architecture, coffee, sombreros vueltiaos, crafts and dance: the Colombia we bring to Dallas.')}</figcaption>
+      <figcaption class="mosaico-texto">
+        <p class="eyebrow" data-i18n="qs.mosaicoEyebrow">${t('mosaicoEyebrow', MOSAICO.es, MOSAICO.en)}</p>
+        <p class="mosaico-lead" data-i18n="qs.mosaico">${t('mosaico',
+          'La Colombia que llevamos a Dallas.',
+          'The Colombia we bring to Dallas.')}</p>
+        <p class="mosaico-p" data-i18n="qs.mosaicoP">${t('mosaicoP',
+          'Cada foto es un pedazo de casa. Las ponemos aquí para que quienes crecen lejos sepan de dónde vienen, y para que quienes acaban de llegar se reconozcan.',
+          'Every picture is a piece of home. We put them here so those growing up far away know where they come from, and so those who have just arrived recognise themselves.')}</p>
+        <ul class="mosaico-tags">
+          <li data-i18n="qs.mt1">${t('mt1', 'Arquitectura', 'Architecture')}</li>
+          <li data-i18n="qs.mt2">${t('mt2', 'Café', 'Coffee')}</li>
+          <li data-i18n="qs.mt3">${t('mt3', 'Sombreros vueltiaos', 'Sombreros vueltiaos')}</li>
+          <li data-i18n="qs.mt4">${t('mt4', 'Artesanía', 'Crafts')}</li>
+          <li data-i18n="qs.mt5">${t('mt5', 'Baile', 'Dance')}</li>
+        </ul>
+      </figcaption>
     </figure>
   </div>
 </section>

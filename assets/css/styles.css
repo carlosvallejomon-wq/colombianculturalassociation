@@ -1283,20 +1283,30 @@ svg { fill: none; stroke: currentColor; stroke-width: 1.7; stroke-linecap: round
    the edge costs no horizontal scrollbar. */
 .cuadros {
   position: absolute;
-  top: 50%;
+  top: 46%;
   right: -2.5%;
   transform: translateY(-50%);
-  width: min(46%, 620px);
+  width: min(48%, 660px);
   z-index: -1;
   pointer-events: none;
   display: grid;
   place-items: center;
 }
-/* Keep the hero text clear of the artwork so the two never collide. The
-   heart is decorative, so below this width it simply steps aside. */
+/* Keep the hero text clear of the artwork so the two never collide. Below
+   900px the artwork is hidden entirely and no reserve is needed. The
+   reserve goes on the individual text blocks rather than the whole column:
+   the stats row sits well below the artwork, and reserving space for it
+   there only squeezed it into cramped two-line cells for nothing. The
+   eyebrow is short enough not to need the reserve at all.
+
+   It is max-width rather than padding-right so each box actually ends where
+   its text does. With padding the boxes still spanned the full column and
+   overlapped the artwork — invisible on screen, but it means anything
+   measuring an element's background (the contrast audit, for one) samples
+   the yellow of the heart where no text is drawn. */
 @media (min-width: 900px) {
-  .hero-home .hero-inner,
-  .hero-inner-page .hero-inner { padding-right: min(43%, 560px); }
+  .hero-home .hero-inner > :not(.hero-stats, .eyebrow),
+  .hero-inner-page .hero-inner > :not(.eyebrow) { max-width: calc(100% - min(45%, 590px)); }
 }
 @media (max-width: 899px) {
   .cuadros { display: none; }
@@ -1331,8 +1341,17 @@ svg { fill: none; stroke: currentColor; stroke-width: 1.7; stroke-linecap: round
    .hero-inner-page rule above: a media query adds no specificity, so an
    earlier block at equal specificity would simply lose. */
 @media (min-width: 900px) {
-  .hero-inner-page { padding-block: clamp(4rem, 7vw, 6.5rem) clamp(3rem, 5vw, 4.5rem); }
-  .hero-inner-page .cuadros { width: min(32%, 400px); }
+  .hero-inner-page {
+    padding-block: clamp(4rem, 7vw, 6.5rem) clamp(3rem, 5vw, 4.5rem);
+    /* Tall enough to hold the artwork at its raised position. Anchored at
+       46% with the artwork centred on that point, the band needs to be at
+       least width/0.92 for the top not to be cut by .hero's overflow. */
+    min-height: 31rem;
+  }
+  .hero-inner-page .cuadros { width: min(35%, 440px); }
+  /* These heroes carry a smaller artwork than the home page, so they do not
+     need the home page's reserve — it would only narrow the text for nothing. */
+  .hero-inner-page .hero-inner > :not(.eyebrow) { max-width: calc(100% - min(37%, 480px)); }
 }
 
 /* --- Photo gallery ------------------------------------------------------- */
@@ -1432,8 +1451,8 @@ svg { fill: none; stroke: currentColor; stroke-width: 1.7; stroke-linecap: round
 /* --- The client's photo collage on the About page ------------------------ */
 .mosaico {
   display: grid;
-  grid-template-columns: minmax(0, 340px) 1fr;
-  gap: clamp(1.2rem, 3vw, 2.2rem);
+  grid-template-columns: minmax(0, 380px) 1fr;
+  gap: clamp(1.4rem, 3.5vw, 3rem);
   align-items: center;
   margin-top: clamp(1.4rem, 2.6vw, 2.1rem);
   padding: clamp(1.2rem, 2.4vw, 1.8rem);
@@ -1444,12 +1463,49 @@ svg { fill: none; stroke: currentColor; stroke-width: 1.7; stroke-linecap: round
   height: auto;
   border-radius: var(--r-md);
 }
-.mosaico figcaption {
+/* The caption used to be a single small line, which left the text half of a
+   very wide card almost empty and made the type look undersized against it.
+   It is now a proper block — label, statement, paragraph, and the subjects
+   of the photographs as tags — so the two halves carry comparable weight. */
+/* The prose is capped for line length, but the tags are not — they read as a
+   row, so letting them use the full column keeps them off a lonely second
+   line. */
+.mosaico-lead, .mosaico-p { max-width: 46ch; }
+.mosaico-lead {
+  margin: 0;
+  font-size: clamp(1.45rem, 1.1rem + 1.5vw, 2.15rem);
+  font-weight: 800;
+  line-height: 1.12;
+  letter-spacing: -.03em;
+  text-wrap: balance;
+  color: var(--ink);
+}
+.mosaico-p {
+  margin: .95rem 0 0;
   color: var(--ink-soft);
-  font-size: clamp(1rem, .95rem + .35vw, 1.18rem);
-  line-height: 1.5;
+  font-size: clamp(1rem, .96rem + .3vw, 1.12rem);
+  line-height: 1.6;
+}
+.mosaico-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .5rem;
+  margin: 1.5rem 0 0;
+  padding: 0;
+  list-style: none;
+}
+.mosaico-tags li {
+  padding: .4rem .85rem;
+  border: 1px solid var(--glass-line);
+  border-radius: 999px;
+  background: rgb(var(--rgb) / .12);
+  color: var(--ink-soft);
+  font-size: .79rem;
+  font-weight: 600;
+  letter-spacing: .04em;
 }
 
 @media (max-width: 720px) {
   .mosaico { grid-template-columns: 1fr; }
+  .mosaico-lead, .mosaico-p { max-width: none; }
 }
