@@ -542,7 +542,13 @@ svg { fill: none; stroke: currentColor; stroke-width: 1.7; stroke-linecap: round
      the following section. */
   overflow: hidden;
 }
-.hero-inner { max-width: 62rem; }
+/* The hero column is as wide as every other section's, so its text starts on
+   the same line as the brand in the header and the cards further down. It
+   used to be capped at 62rem, which indented the hero 93px from everything
+   else and left the page looking hollow at the sides on a wide screen. Line
+   length is protected where it matters instead: .hero-lead has its own 56ch
+   cap, and the title is bounded by the artwork reserve. */
+.hero-inner { max-width: var(--shell); }
 
 .hero-title { font-size: clamp(2.6rem, 1.2rem + 6vw, 5.1rem); letter-spacing: -.045em; }
 .hero-title em {
@@ -1329,6 +1335,11 @@ svg { fill: none; stroke: currentColor; stroke-width: 1.7; stroke-linecap: round
 @media (min-width: 900px) {
   .hero-home { --arte-ancho: min(48vw, 660px); }
   .hero-inner-page { --arte-ancho: min(35vw, 440px); }
+  /* Only the home hero carries the stats slab at its foot, and centred the
+     heart's point landed 1px off it. Raising it on every hero instead would
+     have forced the inner bands taller to avoid clipping the top, adding
+     empty space to pages that do not need it. */
+  .hero-home .cuadros { top: 38%; }
   .hero {
     --arte-hueco: 3rem;
     /* Where the artwork's left edge lands, and therefore how much room the
@@ -1340,7 +1351,7 @@ svg { fill: none; stroke: currentColor; stroke-width: 1.7; stroke-linecap: round
     );
     --texto-max: calc(
       var(--arte-izq) - var(--arte-hueco)
-      - (100vw - min(62rem, 100vw)) / 2 - var(--gutter)
+      - (100vw - min(var(--shell), 100vw)) / 2 - var(--gutter)
     );
   }
   .hero-home .hero-inner > :not(.hero-stats, .eyebrow),
