@@ -1296,15 +1296,15 @@ svg { fill: none; stroke: currentColor; stroke-width: 1.7; stroke-linecap: round
   height: auto;
   max-height: 100%;
   object-fit: contain;
-  /* The artwork is a JPEG on an opaque white card, so there is no alpha to
-     composite away. Clip to the heart's own silhouette to drop that white
-     rectangle. Percentage-based, so the crop tracks the rendered size —
-     a path() in absolute user units stays fixed while the image scales,
-     which sliced the heart in half at the displayed width. */
-  -webkit-clip-path: ellipse(48% 46% at 50% 46%);
-  clip-path: ellipse(48% 46% at 50% 46%);
+  /* No clip-path here on purpose. The artwork used to be a JPEG on an
+     opaque white card and had to be cropped to hide that rectangle, which
+     also shaved the edges of the drawing. It is now a WebP whose white
+     background was removed to real transparency, so it composites cleanly
+     on any ground and the full shape survives. */
 }
-:root[data-theme="dark"] .cuadros img { filter: brightness(.92); }
+/* Slightly dimmed in dark mode so the bright yellow does not glare against
+   the near-black ground. */
+:root[data-theme="dark"] .cuadros img { filter: brightness(.9); }
 
 .hero-home { padding-block: clamp(4rem, 9vw, 7.5rem) clamp(3.5rem, 7vw, 6rem); }
 
