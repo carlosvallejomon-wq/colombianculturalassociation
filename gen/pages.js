@@ -28,7 +28,7 @@ ${items}
 function ctaBand() {
   ns('cta');
   return `<section class="support" id="unete">
-  <div class="shell support-inner reveal lit-amarillo">
+  <div class="shell support-inner reveal lit-azul">
     <div class="support-copy">
       <p class="eyebrow" data-i18n="cta.eyebrow">${t('eyebrow', 'Te esperamos', 'Join us')}</p>
       <h2 data-i18n="cta.title">${t('title', 'Únete a nuestra comunidad', 'Join our community')}</h2>
@@ -83,7 +83,7 @@ function home() {
         'We are an organization created by Colombians for Colombians in North Texas. For more than ten years we have supported families arriving in search of a better life, helping them find the resources they need and keep their roots alive.')}</p>
     </div>
     <div class="cards cards-3">
-      <article class="card program reveal lit-amarillo">
+      <article class="card program reveal lit-azul">
         <span class="p-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 21s-7.5-4.7-7.5-10A4.5 4.5 0 0 1 12 8.4a4.5 4.5 0 0 1 7.5 2.6c0 5.3-7.5 10-7.5 10Z"/></svg></span>
         <h3 data-i18n="mision.c1t">${t('c1t', 'Asistencia social', 'Social assistance')}</h3>
         <p data-i18n="mision.c1p">${t('c1p',
@@ -91,7 +91,7 @@ function home() {
           'We guide families through programs such as TANF, utility bill assistance and health coverage for children.')}</p>
         <a class="link-arrow" href="asistencia.html"><span data-i18n="mision.c1l">${t('c1l', 'Ver programas', 'See programs')}</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h13M12 5.5 18.5 12 12 18.5"/></svg></a>
       </article>
-      <article class="card program reveal lit-azul">
+      <article class="card program reveal lit-amarillo">
         <span class="p-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M9 18V6.5l9-2v11"/><circle cx="6.5" cy="18" r="2.5"/><circle cx="15.5" cy="15.5" r="2.5"/></svg></span>
         <h3 data-i18n="mision.c2t">${t('c2t', 'Cultura y arte', 'Culture and art')}</h3>
         <p data-i18n="mision.c2p">${t('c2p',
@@ -133,7 +133,7 @@ function quienes() {
   const body = `<section class="section">
   <div class="shell">
     <div class="about-grid">
-      <div class="card values-card reveal lit-azul">
+      <div class="card values-card reveal lit-amarillo">
         <ul class="values">
           <li><span class="v-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 21s-7.5-4.7-7.5-10A4.5 4.5 0 0 1 12 8.4a4.5 4.5 0 0 1 7.5 2.6c0 5.3-7.5 10-7.5 10Z"/></svg></span>
             <div><h3 data-i18n="qs.v1t">${t('v1t', 'Servicio', 'Service')}</h3>
@@ -192,7 +192,7 @@ function asistencia() {
   const body = `<section class="section">
   <div class="shell">
 
-    <article class="card ayuda reveal lit-azul" id="tanf">
+    <article class="card ayuda reveal lit-amarillo" id="tanf">
       <span class="p-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="3" y="6" width="18" height="13" rx="2.5"/><path d="M3 10.5h18M7 15h4"/></svg></span>
       <h2 data-i18n="as.p1t">${t('p1t', 'Programa TANF', 'TANF Program')}</h2>
       <p data-i18n="as.p1p">${t('p1p',
@@ -201,7 +201,7 @@ function asistencia() {
       <a class="btn btn-primary" href="contacto.html" data-i18n="as.p1c">${t('p1c', 'Solicitar orientación', 'Request guidance')}</a>
     </article>
 
-    <article class="card ayuda reveal lit-amarillo" id="pago-unico">
+    <article class="card ayuda reveal lit-azul" id="pago-unico">
       <span class="p-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M12 7.5v9M9.5 10h5M9.5 14h5"/></svg></span>
       <h2 data-i18n="as.p2t">${t('p2t', 'Pago único TANF', 'One-time TANF payment')}</h2>
       <p data-i18n="as.p2p">${t('p2p',
@@ -224,7 +224,7 @@ ${tanfItems}
       <a class="btn btn-primary" href="contacto.html" data-i18n="as.p3c">${t('p3c', 'Pedir ayuda con mi factura', 'Get help with my bill')}</a>
     </article>
 
-    <article class="card ayuda reveal lit-azul" id="chip">
+    <article class="card ayuda reveal lit-amarillo" id="chip">
       <span class="p-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 21s-7.5-4.7-7.5-10A4.5 4.5 0 0 1 12 8.4a4.5 4.5 0 0 1 7.5 2.6c0 5.3-7.5 10-7.5 10Z"/></svg></span>
       <h2 data-i18n="as.p4t">${t('p4t', 'CHIP y Medicaid para Niños', 'CHIP and Children’s Medicaid')}</h2>
       <p data-i18n="as.p4p">${t('p4p',
@@ -260,11 +260,11 @@ function cultura() {
               'Culture is what keeps us together far from home. We bring Colombian music, dance and cooking to the stages of Dallas.'));
 
   const cards = [
-    ['lit-amarillo', 'Música', 'Music', 'Vallenato, cumbia y porro en vivo, con agrupaciones locales y artistas invitados.', 'Live vallenato, cumbia and porro, with local groups and guest artists.'],
-    ['lit-azul', 'Danza', 'Dance', 'Grupos de baile folclórico que representan las regiones de Colombia en festivales de la ciudad.', 'Folk dance groups representing Colombia’s regions at city festivals.'],
+    ['lit-azul', 'Música', 'Music', 'Vallenato, cumbia y porro en vivo, con agrupaciones locales y artistas invitados.', 'Live vallenato, cumbia and porro, with local groups and guest artists.'],
+    ['lit-amarillo', 'Danza', 'Dance', 'Grupos de baile folclórico que representan las regiones de Colombia en festivales de la ciudad.', 'Folk dance groups representing Colombia’s regions at city festivals.'],
     ['lit-rojo', 'Gastronomía', 'Food', 'Arepas, empanadas, sancocho y bandeja paisa en nuestras jornadas comunitarias.', 'Arepas, empanadas, sancocho and bandeja paisa at our community gatherings.'],
-    ['lit-azul', 'Artesanía', 'Crafts', 'Mochilas wayuu, sombreros vueltiaos y el trabajo de artesanos colombianos.', 'Wayuu bags, sombreros vueltiaos and the work of Colombian artisans.'],
-    ['lit-amarillo', 'Talleres', 'Workshops', 'Espacios para que niños y jóvenes aprendan sobre la historia y las regiones del país.', 'Spaces for children and young people to learn about the country’s history and regions.'],
+    ['lit-amarillo', 'Artesanía', 'Crafts', 'Mochilas wayuu, sombreros vueltiaos y el trabajo de artesanos colombianos.', 'Wayuu bags, sombreros vueltiaos and the work of Colombian artisans.'],
+    ['lit-azul', 'Talleres', 'Workshops', 'Espacios para que niños y jóvenes aprendan sobre la historia y las regiones del país.', 'Spaces for children and young people to learn about the country’s history and regions.'],
     ['lit-rojo', 'Muestras', 'Showcases', 'Participamos en ferias multiculturales llevando la representación de Colombia.', 'We take part in multicultural fairs, bringing Colombia’s presence to them.'],
   ].map(([lit, es, en, pes, pen], i) => `      <article class="card program reveal ${lit}">
         <h3 data-i18n="cu.c${i + 1}t">${t('c' + (i + 1) + 't', es, en)}</h3>
@@ -302,7 +302,7 @@ function eventos() {
   const body = `<section class="section">
   <div class="shell">
     <ol class="events">
-      <li class="card event is-next reveal lit-azul">
+      <li class="card event is-next reveal lit-amarillo">
         <div class="ev-date">
           <span class="ev-day">20</span>
           <span class="ev-mon" data-i18n="ev.e1m">${t('e1m', 'Jul', 'Jul')}</span>
@@ -389,7 +389,7 @@ ${rows}
         'La Asociación Cultural Colombiana es independiente del Consulado. Publicamos esta información para facilitarte el contacto; los trámites se realizan directamente ante el Consulado.',
         'The Colombian Cultural Association is independent of the Consulate. We publish this information to make contact easier; all paperwork is handled directly by the Consulate.')}</p>
     </div>
-    <figure class="card foto-card reveal lit-azul">
+    <figure class="card foto-card reveal lit-amarillo">
       <img src="assets/img/consulado.jpg" alt="Edificio del Consulado de Colombia en Dallas" loading="lazy" decoding="async" width="800" height="600"
            data-i18n-attr="alt:co.fotoAlt">
       <figcaption data-i18n="co.foto">${t('foto', 'Consulado de Colombia en Dallas, Texas', 'Consulate of Colombia in Dallas, Texas')}</figcaption>
@@ -439,7 +439,7 @@ function contacto() {
       </ul>
     </div>
 
-    <form class="card contact-form reveal lit-azul" id="contactForm" novalidate>
+    <form class="card contact-form reveal lit-amarillo" id="contactForm" novalidate>
       <div class="field">
         <label for="cf-name" data-i18n="form.name">${t('name', 'Nombre', 'Name')}</label>
         <input id="cf-name" name="name" type="text" autocomplete="name" required placeholder="María Rodríguez" data-i18n-attr="placeholder:form.namePh">

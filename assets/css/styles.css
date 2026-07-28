@@ -608,7 +608,6 @@ svg { fill: none; stroke: currentColor; stroke-width: 1.7; stroke-linecap: round
    pane as well as in the light it throws. On a pale ground a coloured drop
    shadow alone is almost invisible — the tint is what makes the colour read. */
 .card {
-  --rgb: var(--rgb-azul);
   position: relative;
   padding: clamp(1.55rem, 3vw, 2.15rem);
   border: 1px solid rgb(var(--rgb) / var(--rim));
@@ -704,7 +703,6 @@ svg { fill: none; stroke: currentColor; stroke-width: 1.7; stroke-linecap: round
 
 /* Quote: the one surface lit from all three sides */
 .quote-card {
-  --rgb: var(--rgb-rojo);
   overflow: hidden;
 }
 .quote-card::after {
@@ -771,7 +769,6 @@ svg { fill: none; stroke: currentColor; stroke-width: 1.7; stroke-linecap: round
 .festival-cta { display: flex; flex-wrap: wrap; gap: .8rem; margin-top: 2.4rem; }
 
 .ticket {
-  --rgb: var(--rgb-amarillo);
   position: relative;
   border-radius: var(--r-xl);
   border: 1px solid var(--glass-line);
@@ -859,7 +856,6 @@ svg { fill: none; stroke: currentColor; stroke-width: 1.7; stroke-linecap: round
   padding: clamp(1.35rem, 2.6vw, 1.9rem);
 }
 .event.is-next {
-  --rgb: var(--rgb-azul);
   border-color: rgb(var(--rgb-azul) / .42);
 }
 
@@ -920,7 +916,6 @@ svg { fill: none; stroke: currentColor; stroke-width: 1.7; stroke-linecap: round
 .support { position: relative; padding-block: clamp(3rem, 6vw, 4.5rem); }
 
 .support-inner {
-  --rgb: var(--rgb-rojo);
   position: relative;
   display: grid;
   grid-template-columns: 1.5fr auto;
@@ -1012,7 +1007,7 @@ svg { fill: none; stroke: currentColor; stroke-width: 1.7; stroke-linecap: round
 .contact-list a { font-weight: 550; word-break: break-word; }
 .c-social { display: flex; gap: 1rem; flex-wrap: wrap; }
 
-.contact-form { --rgb: var(--rgb-azul); display: grid; gap: 1.1rem; }
+.contact-form { display: grid; gap: 1.1rem; }
 .field { display: grid; gap: .45rem; }
 .field label { font-size: .85rem; font-weight: 650; color: var(--ink-soft); }
 
