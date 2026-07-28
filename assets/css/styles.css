@@ -225,21 +225,25 @@ svg { fill: none; stroke: currentColor; stroke-width: 1.7; stroke-linecap: round
 /* Each light owns its own zone. Overlapping yellow, blue and red at large
    radii averages them into grey — the reason to keep them apart, and to
    leave the top-left clear, where the headings sit. */
+/* Amarillo owns the left side of the page and is the largest of the three
+   (the flag's own biggest stripe); azul and rojo own the right side,
+   stacked so neither overlaps the other — two different flag colours
+   overlapping is what produced the unwanted orange earlier in this file. */
 .luz-amarilla {
-  width: 46vw; height: 46vw; min-width: 340px; min-height: 340px;
-  top: -14vh; right: -6vw;
+  width: 52vw; height: 52vw; min-width: 380px; min-height: 380px;
+  top: -16vh; left: -10vw;
   background: radial-gradient(circle, rgb(var(--rgb-amarillo) / .92), transparent 58%);
-  filter: blur(56px);
+  filter: blur(58px);
 }
 .luz-azul {
-  width: 50vw; height: 50vw; min-width: 360px; min-height: 360px;
-  bottom: -20vh; left: -12vw;
+  width: 42vw; height: 42vw; min-width: 320px; min-height: 320px;
+  top: 12vh; right: -14vw;
   background: radial-gradient(circle, rgb(var(--rgb-azul) / .72), transparent 58%);
-  filter: blur(62px);
+  filter: blur(60px);
 }
 .luz-roja {
-  width: 38vw; height: 38vw; min-width: 280px; min-height: 280px;
-  bottom: -14vh; right: 6vw;
+  width: 36vw; height: 36vw; min-width: 260px; min-height: 260px;
+  bottom: -16vh; right: 4vw;
   background: radial-gradient(circle, rgb(var(--rgb-rojo) / .70), transparent 58%);
   filter: blur(58px);
 }
