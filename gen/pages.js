@@ -83,7 +83,7 @@ function home() {
         'We are an organization created by Colombians for Colombians in North Texas. For more than ten years we have supported families arriving in search of a better life, helping them find the resources they need and keep their roots alive.')}</p>
     </div>
     <div class="cards cards-3">
-      <article class="card program reveal lit-azul">
+      <article class="card program reveal lit-amarillo">
         <span class="p-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 21s-7.5-4.7-7.5-10A4.5 4.5 0 0 1 12 8.4a4.5 4.5 0 0 1 7.5 2.6c0 5.3-7.5 10-7.5 10Z"/></svg></span>
         <h3 data-i18n="mision.c1t">${t('c1t', 'Asistencia social', 'Social assistance')}</h3>
         <p data-i18n="mision.c1p">${t('c1p',
@@ -91,7 +91,7 @@ function home() {
           'We guide families through programs such as TANF, utility bill assistance and health coverage for children.')}</p>
         <a class="link-arrow" href="asistencia.html"><span data-i18n="mision.c1l">${t('c1l', 'Ver programas', 'See programs')}</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h13M12 5.5 18.5 12 12 18.5"/></svg></a>
       </article>
-      <article class="card program reveal lit-amarillo">
+      <article class="card program reveal lit-azul">
         <span class="p-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M9 18V6.5l9-2v11"/><circle cx="6.5" cy="18" r="2.5"/><circle cx="15.5" cy="15.5" r="2.5"/></svg></span>
         <h3 data-i18n="mision.c2t">${t('c2t', 'Cultura y arte', 'Culture and art')}</h3>
         <p data-i18n="mision.c2p">${t('c2p',
@@ -260,8 +260,8 @@ function cultura() {
               'Culture is what keeps us together far from home. We bring Colombian music, dance and cooking to the stages of Dallas.'));
 
   const cards = [
-    ['lit-azul', 'Música', 'Music', 'Vallenato, cumbia y porro en vivo, con agrupaciones locales y artistas invitados.', 'Live vallenato, cumbia and porro, with local groups and guest artists.'],
-    ['lit-amarillo', 'Danza', 'Dance', 'Grupos de baile folclórico que representan las regiones de Colombia en festivales de la ciudad.', 'Folk dance groups representing Colombia’s regions at city festivals.'],
+    ['lit-amarillo', 'Música', 'Music', 'Vallenato, cumbia y porro en vivo, con agrupaciones locales y artistas invitados.', 'Live vallenato, cumbia and porro, with local groups and guest artists.'],
+    ['lit-azul', 'Danza', 'Dance', 'Grupos de baile folclórico que representan las regiones de Colombia en festivales de la ciudad.', 'Folk dance groups representing Colombia’s regions at city festivals.'],
     ['lit-rojo', 'Gastronomía', 'Food', 'Arepas, empanadas, sancocho y bandeja paisa en nuestras jornadas comunitarias.', 'Arepas, empanadas, sancocho and bandeja paisa at our community gatherings.'],
     ['lit-amarillo', 'Artesanía', 'Crafts', 'Mochilas wayuu, sombreros vueltiaos y el trabajo de artesanos colombianos.', 'Wayuu bags, sombreros vueltiaos and the work of Colombian artisans.'],
     ['lit-azul', 'Talleres', 'Workshops', 'Espacios para que niños y jóvenes aprendan sobre la historia y las regiones del país.', 'Spaces for children and young people to learn about the country’s history and regions.'],
@@ -317,7 +317,7 @@ function eventos() {
           <p class="ev-meta"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-6.5-5.6-6.5-10.2A6.5 6.5 0 0 1 18.5 10.8C18.5 15.4 12 21 12 21Z"/><circle cx="12" cy="10.5" r="2.3"/></svg><span data-i18n="ev.tbd">${t('tbd', 'Lugar por confirmar · Dallas, TX', 'Venue to be confirmed · Dallas, TX')}</span></p>
         </div>
       </li>
-      <li class="card event reveal lit-rojo">
+      <li class="card event reveal lit-azul">
         <div class="ev-date">
           <span class="ev-day ev-day-tbd">—</span>
           <span class="ev-mon" data-i18n="ev.e2m">${t('e2m', 'May', 'May')}</span>
