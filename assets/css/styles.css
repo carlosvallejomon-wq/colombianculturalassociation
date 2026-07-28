@@ -75,6 +75,10 @@
 
   /* Layout */
   --shell: 1180px;
+  /* Widest the hero's text-plus-artwork composition is allowed to spread.
+     Beyond this the pair centres together rather than the artwork chasing
+     the page edge away from the text. */
+  --composicion: 96rem;
   --gutter: clamp(1.15rem, 4vw, 2.5rem);
   --section-y: clamp(4.5rem, 9vw, 8rem);
 
@@ -1284,29 +1288,63 @@ svg { fill: none; stroke: currentColor; stroke-width: 1.7; stroke-linecap: round
 .cuadros {
   position: absolute;
   top: 46%;
-  right: -2.5%;
+  /* Hard against the page edge — until the page gets wider than the
+     composition is meant to be. The artwork can only grow so far (it has to
+     fit inside the hero band), so on a wide screen an edge-pinned artwork
+     drifts away from the text and opens a gap that grows with the viewport:
+     500px of dead space at 2200px wide. Past 96rem the whole composition
+     centres instead, which keeps the gap constant. */
+  right: max(-2.5vw, calc((100vw - var(--composicion)) / 2));
   transform: translateY(-50%);
-  width: min(48%, 660px);
+  width: var(--arte-ancho, min(48vw, 660px));
   z-index: -1;
   pointer-events: none;
   display: grid;
   place-items: center;
 }
 /* Keep the hero text clear of the artwork so the two never collide. Below
-   900px the artwork is hidden entirely and no reserve is needed. The
-   reserve goes on the individual text blocks rather than the whole column:
-   the stats row sits well below the artwork, and reserving space for it
-   there only squeezed it into cramped two-line cells for nothing. The
-   eyebrow is short enough not to need the reserve at all.
+   900px the artwork is hidden entirely and no reserve is needed.
 
-   It is max-width rather than padding-right so each box actually ends where
-   its text does. With padding the boxes still spanned the full column and
-   overlapped the artwork — invisible on screen, but it means anything
-   measuring an element's background (the contrast audit, for one) samples
-   the yellow of the heart where no text is drawn. */
+   The reserve is derived from where the artwork actually is, not from a
+   percentage of the text column. Those are different things: the artwork is
+   anchored to the viewport edge, while the column is centred and capped at
+   62rem, so on a wide screen the artwork drifts away from the column. A
+   fixed fraction kept the title pinned to 502px at every viewport while the
+   gap to the heart grew to 500px of dead space.
+
+   Reading the terms below: the artwork's left edge is at 102.5vw minus its
+   own width; subtract the gap we want, then the distance from the viewport
+   edge to where the text starts (half the leftover margin, plus the gutter).
+   min(100%, …) lets the text simply use the whole column once the artwork
+   is far enough away to stop mattering.
+
+   It applies per text block rather than to the column because the stats row
+   sits well below the artwork — reserving space for it there only squeezed
+   it into cramped two-line cells. And it is max-width rather than
+   padding-right so each box ends where its text does; with padding the
+   boxes still spanned the full column and overlapped the artwork, which is
+   invisible on screen but makes anything sampling an element's background
+   (the contrast audit, for one) read the heart's yellow where no text is
+   drawn. */
 @media (min-width: 900px) {
+  .hero-home { --arte-ancho: min(48vw, 660px); }
+  .hero-inner-page { --arte-ancho: min(35vw, 440px); }
+  .hero {
+    --arte-hueco: 3rem;
+    /* Where the artwork's left edge lands, and therefore how much room the
+       text has before it: the viewport, less the artwork's inset from the
+       right, less the artwork itself, less the gap, less the distance from
+       the viewport edge to where the text column starts. */
+    --arte-izq: calc(
+      100vw - max(-2.5vw, (100vw - var(--composicion)) / 2) - var(--arte-ancho)
+    );
+    --texto-max: calc(
+      var(--arte-izq) - var(--arte-hueco)
+      - (100vw - min(62rem, 100vw)) / 2 - var(--gutter)
+    );
+  }
   .hero-home .hero-inner > :not(.hero-stats, .eyebrow),
-  .hero-inner-page .hero-inner > :not(.eyebrow) { max-width: calc(100% - min(45%, 590px)); }
+  .hero-inner-page .hero-inner > :not(.eyebrow) { max-width: min(100%, var(--texto-max)); }
 }
 @media (max-width: 899px) {
   .cuadros { display: none; }
@@ -1348,10 +1386,8 @@ svg { fill: none; stroke: currentColor; stroke-width: 1.7; stroke-linecap: round
        least width/0.92 for the top not to be cut by .hero's overflow. */
     min-height: 31rem;
   }
+  /* Keep in step with --arte-ancho above, which the text reserve reads. */
   .hero-inner-page .cuadros { width: min(35%, 440px); }
-  /* These heroes carry a smaller artwork than the home page, so they do not
-     need the home page's reserve — it would only narrow the text for nothing. */
-  .hero-inner-page .hero-inner > :not(.eyebrow) { max-width: calc(100% - min(37%, 480px)); }
 }
 
 /* --- Photo gallery ------------------------------------------------------- */
