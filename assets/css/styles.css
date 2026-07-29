@@ -1403,11 +1403,17 @@ svg { fill: none; stroke: currentColor; stroke-width: 1.7; stroke-linecap: round
   .hero-home .hero-inner > :not(.hero-stats, .eyebrow),
   .hero-inner-page .hero-inner > :not(.eyebrow) { max-width: min(100%, var(--texto-max)); }
 }
-/* Below this the hero is a single column and there is no room beside the
-   text, so the artwork steps aside. Above it — every iPad in portrait
-   included — it stays. */
+/* On a phone there is no room beside the text, so the artwork stops being
+   a floating graphic and becomes part of the column: back in normal flow,
+   centred, above the heading. It sits first in the markup already, so no
+   reordering is needed. */
 @media (max-width: 699px) {
-  .cuadros { display: none; }
+  .cuadros {
+    position: static;
+    transform: none;
+    width: min(58%, 250px);
+    margin: 0 auto clamp(1rem, 4vw, 1.6rem);
+  }
 }
 .cuadros img {
   width: 100%;
